@@ -32,7 +32,9 @@ results_conditional_distance[1,1]=cond_l2(example1)
 results_conditional_distance[1,2]=asymptotic_test_conditional(example1,alpha)
 results_conditional_distance[1,3]=bootstrap_test_conditional(example1,alpha)
 
-results_minimum_distance[1,1]=min_l22(example1/sum(example1))
+results_minimum_distance[1,1]=min_l2(example1)
+results_minimum_distance[1,2]=asymptotic_test_minimum(example1,alpha)
+results_minimum_distance[1,3]=bootstrap_test_minimum(example1,alpha)
 
 
 # 2. example
@@ -49,6 +51,9 @@ results_conditional_distance[2,1]=cond_l2(example2)
 results_conditional_distance[2,2]=asymptotic_test_conditional(example2,alpha)
 results_conditional_distance[2,3]=bootstrap_test_conditional(example2,alpha)
 
+results_minimum_distance[2,1]=min_l2(example2)
+results_minimum_distance[2,2]=asymptotic_test_minimum(example2,alpha)
+results_minimum_distance[2,3]=bootstrap_test_minimum(example2,alpha)
 
 
 # 3. example
@@ -71,6 +76,10 @@ results_conditional_distance[3,1]=cond_l2(example3)
 results_conditional_distance[3,2]=asymptotic_test_conditional(example3,alpha)
 results_conditional_distance[3,3]=bootstrap_test_conditional(example3,alpha)
 
+results_minimum_distance[3,1]=min_l2(example3)
+results_minimum_distance[3,2]=asymptotic_test_minimum(example3,alpha)
+results_minimum_distance[3,3]=bootstrap_test_minimum(example3,alpha)
+
 
 # 4. example
 # HFE genotype of the whole population referred for a personal or family
@@ -88,4 +97,9 @@ example4 = matrix(data=c(178, 0, 0,
 results_conditional_distance[4,1]=cond_l2(example4)
 results_conditional_distance[4,2]=asymptotic_test_conditional(example4,alpha)
 results_conditional_distance[4,3]=bootstrap_test_conditional(example4,alpha)
+
+results_minimum_distance[4,1]=min_l2(example4)
+results_minimum_distance[4,2]=asymptotic_test_minimum(example4,alpha)
+results_minimum_distance[4,3]=bootstrap_test_minimum(example4,alpha)
+
 

@@ -148,3 +148,55 @@ bootstrap_test_conditional<-function(tab, alpha,
   return(res$root)
 }
 
+bootstrap_test_minimum<-function(tab, alpha, 
+                                     nSimulation=10000, 
+                                     nExteriorPoints=0){
+  #find start value for min eps
+  #use for this purpose the asymptotic test with 
+  #small safety margin
+  eps=asymptotic_test_minimum(tab,alpha)*1.1
+  
+  
+  n=sum(tab)
+  tab=tab/n
+  
+  #number of search directions and seed
+  if (nExteriorPoints==0) 
+    nExteriorPoints=(nrow(tab)+ncol(tab))*50
+  
+  set.seed(10071977)
+  
+  distance<-function(x){
+    res=min_l22(tab)
+    return(sqrt(res$val))
+  }
+  
+  #calculate exterior points
+  f<-function(x){
+    randomExteriorPoint(tab,eps,distance)
+  }
+  
+  i=c(1:nExteriorPoints)
+  exteriorPoints=lapply(i, f)
+  
+  #calculate min epsilon
+  ff<-function(x){
+    set.seed(01012019)
+    pval=protoBstTest(tab,n,distance,eps = x,exteriorPoints,nSimulation)
+    pval-alpha
+  }
+  
+  #check boundary values
+  #check lower bound
+  lb=ff(0)
+  if (lb<0) return(0)
+  
+  #check upper bound
+  ub=ff(eps)
+  if (ub>0) return(NA)
+  
+  res=uniroot(ff,c(0,eps))
+  return(res$root)
+}
+
+

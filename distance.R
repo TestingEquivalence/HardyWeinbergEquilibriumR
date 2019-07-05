@@ -64,6 +64,12 @@ min_l22<-function(table){
    return(opRes)               
 }
 
+min_l2<-function(tab){
+  tab=tab/sum(tab)
+  res=min_l22(tab)
+  return(sqrt(res$val))
+}
+
 cond_l22<-function(tab){
   p=startValue(tab)
   prod=product(p)
