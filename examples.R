@@ -1,3 +1,7 @@
+source("distance.R")
+source("asymptotic_test.R")
+source("bootstrap_test.R")
+
 # significance level
 alpha=0.05
 
@@ -24,8 +28,11 @@ example1 = matrix(data=c(5, 0, 0, 0,
                           30, 55, 15, 33),
                   nrow=4, ncol=4, byrow=TRUE)
 
-results_conditional_distance[1,1]=sqrt(cond_l22(example1/sum(example1)))
+results_conditional_distance[1,1]=cond_l2(example1)
 results_conditional_distance[1,2]=asymptotic_test_conditional(example1,alpha)
+results_conditional_distance[1,3]=bootstrap_test_conditional(example1,alpha)
+
+results_minimum_distance[1,1]=min_l22(example1/sum(example1))
 
 
 # 2. example
@@ -38,8 +45,9 @@ example2 = matrix(data=c(2, 0, 0, 0,
                          22, 21, 20, 10),
                   nrow=4, ncol=4, byrow=TRUE)
 
-results_conditional_distance[2,1]=sqrt(cond_l22(example2/sum(example2)))
+results_conditional_distance[2,1]=cond_l2(example2)
 results_conditional_distance[2,2]=asymptotic_test_conditional(example2,alpha)
+results_conditional_distance[2,3]=bootstrap_test_conditional(example2,alpha)
 
 
 
@@ -59,8 +67,9 @@ example3= matrix(data=c(1236, 0, 0, 0, 0, 0, 0, 0, 0,
                         115, 5, 2, 53, 1, 149, 0, 0, 4),
                  nrow=9, ncol=9, byrow=TRUE)
 
-results_conditional_distance[3,1]=sqrt(cond_l22(example3/sum(example3)))
+results_conditional_distance[3,1]=cond_l2(example3)
 results_conditional_distance[3,2]=asymptotic_test_conditional(example3,alpha)
+results_conditional_distance[3,3]=bootstrap_test_conditional(example3,alpha)
 
 
 # 4. example
@@ -76,5 +85,7 @@ example4 = matrix(data=c(178, 0, 0,
                          141, 170, 334),
                   nrow=3, ncol=3, byrow = TRUE)
 
-results_conditional_distance[4,1]=sqrt(cond_l22(example4/sum(example4)))
+results_conditional_distance[4,1]=cond_l2(example4)
 results_conditional_distance[4,2]=asymptotic_test_conditional(example4,alpha)
+results_conditional_distance[4,3]=bootstrap_test_conditional(example4,alpha)
+

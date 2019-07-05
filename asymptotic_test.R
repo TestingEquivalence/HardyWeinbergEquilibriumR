@@ -52,3 +52,27 @@ asymptotic_test_conditional<-function(tab, alpha){
   return(eps)
 }
 
+asymptotic_test_minimum<-function(tab, alpha){
+  #normalize tab
+  n=sum(tab)
+  tab=tab/n
+  
+  #calculate minimum distance
+  res=min_l22(tab)
+  prod=product(res$par)
+  q=triangle(prod)
+  
+  
+  vtab=as.vector(t(tab))
+  der=l22_first_derivative(tab, q)
+  vder=as.vector(t(der))
+  
+  vol = asympt_stdev(vtab,vder) / sqrt(n)
+  qt=qnorm(1-alpha,0,1)
+  t= res$value
+  eps = t + qt*vol
+  eps=sqrt(eps)
+  return(eps)
+}
+
+

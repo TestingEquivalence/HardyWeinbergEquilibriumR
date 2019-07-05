@@ -73,6 +73,11 @@ cond_l22<-function(tab){
   return(dst)
 }
 
+cond_l2<-function(tab){
+  tab=tab/sum(tab)
+  return(sqrt(cond_l22(tab)))
+}
+
 cond_l22_da<-function(p,i,j,k,m){
   res=0
 
