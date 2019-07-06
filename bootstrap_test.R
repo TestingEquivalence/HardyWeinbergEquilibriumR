@@ -169,7 +169,7 @@ bootstrap_test_minimum<-function(tab, alpha,
   set.seed(10071977)
   
   distance<-function(x){
-    res=min_l22(tab)
+    res=min_l22(x)
     return(sqrt(res$val))
   }
   
