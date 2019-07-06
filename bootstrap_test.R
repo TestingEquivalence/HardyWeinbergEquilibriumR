@@ -2,10 +2,12 @@ source("distance.R")
 source("asymptotic_test.R")
 
 randomPoint<-function(tab){
+  #erzeuge hier diagonal matrix 
   size=nrow(tab)*ncol(tab)
   x=runif(size,0,1)
   x=x/sum(x)
   m=matrix(data=x,nrow=nrow(tab), ncol=ncol(tab),byrow = TRUE)
+  m=triangle(m)
   return(m)
 }
 
