@@ -83,4 +83,5 @@ results_minimum_distance[4,1]=min_l2(example4)
 results_minimum_distance[4,2]=asymptotic_test_minimum(example4,alpha)
 results_minimum_distance[4,3]=bootstrap_test_minimum(example4,alpha)
  
-
+write.table(results_conditional_distance,"results_conditional_distance.txt")
+write.table(results_minimum_distance,"results_minimum_distance.txt")
