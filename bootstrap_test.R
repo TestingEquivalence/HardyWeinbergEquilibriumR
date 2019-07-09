@@ -101,11 +101,12 @@ protoBstTest<-function(tab,n,distance,eps,exteriorPoints,nSimulation){
 
 bootstrap_test_conditional<-function(tab, alpha, 
                          nSimulation=10000, 
-                         nExteriorPoints=0){
+                         nExteriorPoints=0,
+                         eps=0){
   #find start value for min eps
   #use for this purpose the asymptotic test with 
   #small safety margin
-  eps=asymptotic_test_conditional(tab,alpha)*1.1
+  beps=asymptotic_test_conditional(tab,alpha)*1.1
   
   
   n=sum(tab)
@@ -113,7 +114,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   
   #number of search directions and seed
   if (nExteriorPoints==0) 
-    nExteriorPoints=(nrow(tab)+ncol(tab))*50
+    nExteriorPoints=nrow(tab)*50
   
   set.seed(10071977)
   
@@ -124,11 +125,20 @@ bootstrap_test_conditional<-function(tab, alpha,
   
   #calculate exterior points
   f<-function(x){
-    randomExteriorPoint(tab,eps,distance)
+    randomExteriorPoint(tab,beps,distance)
   }
   
   i=c(1:nExteriorPoints)
   exteriorPoints=lapply(i, f)
+  
+  # if epsilon given, make short-cut and
+  # calculate the logical value only
+  if (eps>0){
+    pval=protoBstTest(tab,n,distance,eps,exteriorPoints,nSimulation)
+    l=pval<=alpha
+    return(list(p_value=pval,result=l))
+  }
+  
   
   #calculate min epsilon
   ff<-function(x){
@@ -143,20 +153,21 @@ bootstrap_test_conditional<-function(tab, alpha,
   if (lb<0) return(0)
   
   #check upper bound
-  ub=ff(eps)
+  ub=ff(beps)
   if (ub>0) return(NA)
   
-  res=uniroot(ff,c(0,eps))
+  res=uniroot(ff,c(0,beps))
   return(res$root)
 }
 
 bootstrap_test_minimum<-function(tab, alpha, 
-                                     nSimulation=10000, 
-                                     nExteriorPoints=0){
+                                 nSimulation=10000, 
+                                 nExteriorPoints=0,
+                                 eps=0){
   #find start value for min eps
   #use for this purpose the asymptotic test with 
   #small safety margin
-  eps=asymptotic_test_minimum(tab,alpha)*1.1
+  beps=asymptotic_test_minimum(tab,alpha)*1.1
   
   
   n=sum(tab)
@@ -164,7 +175,7 @@ bootstrap_test_minimum<-function(tab, alpha,
   
   #number of search directions and seed
   if (nExteriorPoints==0) 
-    nExteriorPoints=(nrow(tab)+ncol(tab))*50
+    nExteriorPoints=nrow(tab)*50
   
   set.seed(10071977)
   
@@ -175,11 +186,19 @@ bootstrap_test_minimum<-function(tab, alpha,
   
   #calculate exterior points
   f<-function(x){
-    randomExteriorPoint(tab,eps,distance)
+    randomExteriorPoint(tab,beps,distance)
   }
   
   i=c(1:nExteriorPoints)
   exteriorPoints=lapply(i, f)
+  
+  # if epsilon given, make short-cut and
+  # calculate the logical value only
+  if (eps>0){
+    pval=protoBstTest(tab,n,distance,eps,exteriorPoints,nSimulation)
+    l=pval<=alpha
+    return(list(p_value=pval,result=l))
+  }
   
   #calculate min epsilon
   ff<-function(x){
@@ -194,10 +213,10 @@ bootstrap_test_minimum<-function(tab, alpha,
   if (lb<0) return(0)
   
   #check upper bound
-  ub=ff(eps)
+  ub=ff(beps)
   if (ub>0) return(NA)
   
-  res=uniroot(ff,c(0,eps))
+  res=uniroot(ff,c(0,beps))
   return(res$root)
 }
 
