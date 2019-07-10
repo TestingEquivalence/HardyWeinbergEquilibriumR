@@ -34,6 +34,8 @@ linearBoundaryPoint<-function(p,q,eps,distance){
   return(linComb(p,q,aMin$root))
 }
 
+
+
 protoBstTest<-function(tab,n,distance,eps,exteriorPoints,nSimulation){
   #calculate test statistic
   t=distance(tab)

@@ -2,6 +2,7 @@ source("distance.R")
 source("asymptotic_test.R")
 source("bootstrap_test.R")
 source("data_sets.R")
+source("simulation.R")
 
 rp<-function(i,p,n){
   rp=rmultinom(n=1,size=n,prob=p)
@@ -10,24 +11,16 @@ rp<-function(i,p,n){
   return(res)
 }
 
-size<-function(table, test){
-  n=sum(tab)
-  tab=tab/n
+pList<-function(tab){
   
-  p=startValue(tab)
-  
-  hwe_points=c(triangle(product(p)))
-  i=c(1:100)
-  set.seed(10072019)
-  vec=lapply(i, rp, n=n, p=p)
-  hwe_points=c(hwe_points,vec)
-  
-  lapply(hwe_points, test)
 }
 
 alpha=0.05
-test_asymp_cond_dst<-function(tab){
-  asymptotic_test_conditional(tab,alpha)
+eps=0.13
+
+f<-function(i){
+  min_eps=asymptotic_test_conditional(example1,alpha)
+  return(min_eps<=eps)
 }
 
-size_asymp_cond_dst=size(  
+power(f,1000)
