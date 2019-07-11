@@ -19,6 +19,10 @@ triangle<-function(tab){
   return(ttab)
 }
 
+p2hwe<-function(p){
+  triangle(product(p))
+}
+
 l22<-function(tab1,tab2){
   t=tab1-tab2
   t=t*t

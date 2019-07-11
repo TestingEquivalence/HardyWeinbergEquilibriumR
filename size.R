@@ -11,16 +11,48 @@ rp<-function(i,p,n){
   return(res)
 }
 
-pList<-function(tab){
+powerAtHWE<-function(p,n,eps){
+  alpha=0.05
+  nSamples=10
+  hwe=p2hwe(p)
   
+  #power of asymptotic test, conditional distance
+  test<-function(tab){
+    minEps=asymptotic_test_conditional(tab,alpha)
+    return(minEps<=eps)
+  }
+
+  set.seed(11072019)
+  p1=power(test,n,hwe,nSamples)
+  
+  #power of bootstrap test, conditional distance
+  test<-function(tab){
+    res=bootstrap_test_conditional(tab,alpha, eps=eps)
+    return(res$result)
+  }
+  
+  set.seed(11072019)
+  p2=power(test,n,hwe,nSamples)
+  
+  #power of asymptotic test, minimum distance
+  test<-function(tab){
+    minEps=asymptotic_test_minimum(tab,alpha)
+    return(minEps<=eps)
+  }
+  
+  set.seed(11072019)
+  p3=power(test,n,hwe,nSamples)
+  
+  #power of bootstrap test, conditional distance
+  test<-function(tab){
+    res=bootstrap_test_minimum(tab,alpha, eps=eps)
+    return(res$result)
+  }
+  
+  set.seed(11072019)
+  p4=power(test,n,hwe,nSamples)
+  
+  
+  
+  return(c(eps,p1,p2,p3,p4))
 }
-
-alpha=0.05
-eps=0.13
-
-f<-function(i){
-  min_eps=asymptotic_test_conditional(example1,alpha)
-  return(min_eps<=eps)
-}
-
-power(f,1000)

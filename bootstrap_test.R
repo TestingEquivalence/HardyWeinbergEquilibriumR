@@ -108,7 +108,11 @@ bootstrap_test_conditional<-function(tab, alpha,
   #find start value for min eps
   #use for this purpose the asymptotic test with 
   #small safety margin
-  beps=asymptotic_test_conditional(tab,alpha)*1.1
+  #or set it eps if provided
+  beps=eps
+  if (eps==0)
+    beps=asymptotic_test_conditional(tab,alpha)*1.1
+  
   
   
   n=sum(tab)
@@ -138,7 +142,8 @@ bootstrap_test_conditional<-function(tab, alpha,
   if (eps>0){
     pval=protoBstTest(tab,n,distance,eps,exteriorPoints,nSimulation)
     l=pval<=alpha
-    return(list(p_value=pval,result=l))
+    ls=list(p_value=pval,result=l)
+    return(ls)
   }
   
   
@@ -169,8 +174,10 @@ bootstrap_test_minimum<-function(tab, alpha,
   #find start value for min eps
   #use for this purpose the asymptotic test with 
   #small safety margin
-  beps=asymptotic_test_minimum(tab,alpha)*1.1
-  
+  #or set it eps if provided
+  beps=eps
+  if (eps==0)
+    beps=asymptotic_test_minimum(tab,alpha)*1.1
   
   n=sum(tab)
   tab=tab/n
