@@ -11,48 +11,79 @@ rp<-function(i,p,n){
   return(res)
 }
 
-powerAtHWE<-function(p,n,eps){
+powerAtHWE<-function(p,n,eps,nSamples,selector){
   alpha=0.05
-  nSamples=10
   hwe=p2hwe(p)
   
   #power of asymptotic test, conditional distance
-  test<-function(tab){
-    minEps=asymptotic_test_conditional(tab,alpha)
-    return(minEps<=eps)
+  p1=0
+  
+  if (selector[1]){
+    test<-function(tab){
+      minEps=asymptotic_test_conditional(tab,alpha)
+      return(minEps<=eps)
+    }
+    
+    set.seed(11072019)
+    p1=power(test,n,hwe,nSamples)
   }
-
-  set.seed(11072019)
-  p1=power(test,n,hwe,nSamples)
   
   #power of bootstrap test, conditional distance
-  test<-function(tab){
-    res=bootstrap_test_conditional(tab,alpha, eps=eps)
-    return(res$result)
-  }
+  p2=0
   
-  set.seed(11072019)
-  p2=power(test,n,hwe,nSamples)
+  if (selector[2]){
+    test<-function(tab){
+      res=bootstrap_test_conditional(tab,alpha, eps=eps)
+      return(res$result)
+    }
+    
+    set.seed(11072019)
+    p2=power(test,n,hwe,nSamples)
+  }
   
   #power of asymptotic test, minimum distance
-  test<-function(tab){
-    minEps=asymptotic_test_minimum(tab,alpha)
-    return(minEps<=eps)
-  }
+  p3=0
   
-  set.seed(11072019)
-  p3=power(test,n,hwe,nSamples)
+  if (selector[3]){
+    test<-function(tab){
+      minEps=asymptotic_test_minimum(tab,alpha)
+      return(minEps<=eps)
+    }
+    
+    set.seed(11072019)
+    p3=power(test,n,hwe,nSamples)
+  }
   
   #power of bootstrap test, conditional distance
-  test<-function(tab){
-    res=bootstrap_test_minimum(tab,alpha, eps=eps)
-    return(res$result)
+  p4=0
+  
+  if (selector[4]){
+    test<-function(tab){
+      res=bootstrap_test_minimum(tab,alpha, eps=eps)
+      return(res$result)
+    }
+    
+    set.seed(11072019)
+    p4=power(test,n,hwe,nSamples)
   }
-  
-  set.seed(11072019)
-  p4=power(test,n,hwe,nSamples)
-  
   
   
   return(c(eps,p1,p2,p3,p4))
 }
+
+# power of sample
+powerAtPoint<-function(tab, eps, nSamples, selector=c(TRUE,FALSE,TRUE,FALSE)){
+  n=sum(tab)
+  p=startValue(tab/n)
+  powerAtHWE(p,n,eps,nSamples,selector)
+}
+
+# power at sample1
+sizeSample1=matrix(data=NA, nrow=10, ncol=5)
+colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+
+sizeSample1[1,]=powerAtPoint(example1,0.12,1000)
+sizeSample1[2,]=powerAtPoint(example1,0.10,1000) 
+sizeSample1[3,]=powerAtPoint(example1,0.09,1000) 
+sizeSample1[4,]=powerAtPoint(example1,0.08,1000) 
+sizeSample1[5,]=powerAtPoint(example1,0.07,1000) 
