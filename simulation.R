@@ -30,6 +30,7 @@ power<-function(test, n, tab, nSamples ){
   i=c(1:nSamples)
   sampleList=lapply(i, sample, tab,n)
   v=parSapply(cl,sampleList, test)
+  #v=sapply(sampleList, test)
   return(sum(v==TRUE)/nSamples)
 }
 
