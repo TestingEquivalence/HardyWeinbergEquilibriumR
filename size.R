@@ -91,12 +91,27 @@ powerAtPoint<-function(tab, eps, nSamples, selector=c(TRUE,FALSE,TRUE,FALSE)){
 #write.table(sizeSample1, "sizeSample1.txt")
 
 # power at sample2
-sizeSample2=matrix(data=NA, nrow=10, ncol=5)
-colnames(sizeSample2)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+#sizeSample2=matrix(data=NA, nrow=10, ncol=5)
+#colnames(sizeSample2)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
 
-sizeSample2[1,]=powerAtPoint(example2,0.12,1000,c(TRUE,FALSE,TRUE,FALSE))
-sizeSample2[2,]=powerAtPoint(example2,0.1,1000,c(TRUE,FALSE,TRUE,FALSE))
-sizeSample2[3,]=powerAtPoint(example2,0.09,1000,c(TRUE,FALSE,TRUE,FALSE))
-sizeSample2[4,]=powerAtPoint(example2,0.08,1000,c(TRUE,FALSE,TRUE,FALSE))
-sizeSample2[5,]=powerAtPoint(example2,0.07,1000,c(TRUE,FALSE,TRUE,FALSE))
+#sizeSample2[1,]=powerAtPoint(example2,0.12,1000,c(TRUE,TRUE,TRUE,TRUE))
+#sizeSample2[2,]=powerAtPoint(example2,0.1,1000,c(TRUE,TRUE,TRUE,TRUE))
+#sizeSample2[3,]=powerAtPoint(example2,0.09,1000,c(TRUE,TRUE,TRUE,TRUE))
+#sizeSample2[4,]=powerAtPoint(example2,0.08,1000,c(TRUE,TRUE,TRUE,TRUE))
+#sizeSample2[5,]=powerAtPoint(example2,0.07,1000,c(TRUE,TRUE,TRUE,TRUE))
+
+#write.table(sizeSample2, "sizeSample2.txt")
+
+# power at sample3
+sizeSample3=matrix(data=NA, nrow=10, ncol=5)
+colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+
+sizeSample3[1,]=powerAtPoint(example3,0.018,1000,c(TRUE,TRUE,TRUE,TRUE))
+sizeSample3[2,]=powerAtPoint(example3,0.016,1000,c(TRUE,TRUE,TRUE,TRUE))
+sizeSample3[3,]=powerAtPoint(example3,0.014,1000,c(TRUE,TRUE,TRUE,TRUE))
+sizeSample3[4,]=powerAtPoint(example3,0.012,1000,c(TRUE,TRUE,TRUE,TRUE))
+sizeSample3[5,]=powerAtPoint(example3,0.010,1000,c(TRUE,TRUE,TRUE,TRUE))
+
+
+write.table(sizeSample3, "sizeSample3.txt")
 
