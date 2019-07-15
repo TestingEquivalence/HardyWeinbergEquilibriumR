@@ -4,13 +4,6 @@ source("bootstrap_test.R")
 source("data_sets.R")
 source("simulation.R")
 
-rp<-function(i,p,n){
-  rp=rmultinom(n=1,size=n,prob=p)
-  rp=rp/sum(rp)
-  res=triangle(product(rp))
-  return(res)
-}
-
 powerAtHWE<-function(p,n,eps,nSamples,selector){
   alpha=0.05
   hwe=p2hwe(p)
@@ -72,10 +65,31 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
 }
 
 # power of sample
-powerAtPoint<-function(tab, eps, nSamples, selector=c(TRUE,FALSE,TRUE,FALSE)){
+powerAtPoint<-function(tab, eps, nSamples, selector){
   n=sum(tab)
   p=startValue(tab/n)
   powerAtHWE(p,n,eps,nSamples,selector)
+}
+
+
+rp<-function(i,p,n){
+  rp=rmultinom(n=1,size=n,prob=p)
+  rp=rp/sum(rp)
+}
+
+
+# power sensitivity
+powerSensitivity<-function(tab, eps, nSamples,selector){
+  n=sum(tab)
+  p=startValue(tab/n)
+  
+  nPoints=100
+  i=c(1:nPoints)
+  
+  set.seed(01082019)
+  points=lapply(i,rp,p,n)
+
+  sapply(points, powerAtHWE,eps=eps,nSamples=nSamples,selector=selector, n=n)
 }
 
 # power at sample1
@@ -103,15 +117,30 @@ powerAtPoint<-function(tab, eps, nSamples, selector=c(TRUE,FALSE,TRUE,FALSE)){
 #write.table(sizeSample2, "sizeSample2.txt")
 
 # power at sample3
-sizeSample3=matrix(data=NA, nrow=10, ncol=5)
-colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+#sizeSample3=matrix(data=NA, nrow=10, ncol=5)
+#colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
 
-sizeSample3[1,]=powerAtPoint(example3,0.018,1000,c(TRUE,TRUE,TRUE,TRUE))
-sizeSample3[2,]=powerAtPoint(example3,0.016,1000,c(TRUE,TRUE,TRUE,TRUE))
-sizeSample3[3,]=powerAtPoint(example3,0.014,1000,c(TRUE,TRUE,TRUE,TRUE))
-sizeSample3[4,]=powerAtPoint(example3,0.012,1000,c(TRUE,TRUE,TRUE,TRUE))
-sizeSample3[5,]=powerAtPoint(example3,0.010,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample3[1,]=powerAtPoint(example3,0.018,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample3[2,]=powerAtPoint(example3,0.016,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample3[3,]=powerAtPoint(example3,0.014,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample3[4,]=powerAtPoint(example3,0.012,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample3[5,]=powerAtPoint(example3,0.010,1000,c(TRUE,TRUE,TRUE,TRUE))
+# 
+# 
+# write.table(sizeSample3, "sizeSample3.txt")
 
 
-write.table(sizeSample3, "sizeSample3.txt")
+# power at sample4
+# sizeSample4=matrix(data=NA, nrow=10, ncol=5)
+# colnames(sizeSample4)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+# 
+# sizeSample4[1,]=powerAtPoint(example4,0.06,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample4[2,]=powerAtPoint(example4,0.05,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample4[3,]=powerAtPoint(example4,0.04,1000,c(TRUE,TRUE,TRUE,TRUE))
+# sizeSample4[4,]=powerAtPoint(example4,0.03,1000,c(TRUE,TRUE,TRUE,TRUE))
+# 
+# 
+# write.table(sizeSample4, "sizeSample4.txt")
 
+sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000, selector = c(TRUE,FALSE,FALSE,FALSE))
+sensi_example2=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000, selector = c(TRUE,FALSE,FALSE,FALSE))
