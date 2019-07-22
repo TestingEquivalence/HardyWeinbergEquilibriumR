@@ -18,7 +18,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
     }
     
     set.seed(11072019)
-    p1=power(test,n,hwe,nSamples)
+    p1=power(tab = hwe,test,n,nSamples)
   }
   
   #power of bootstrap test, conditional distance
@@ -31,7 +31,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
     }
     
     set.seed(11072019)
-    p2=power(test,n,hwe,nSamples)
+    p2=power(tab = hwe,test,n,nSamples)
   }
   
   #power of asymptotic test, minimum distance
@@ -44,7 +44,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
     }
     
     set.seed(11072019)
-    p3=power(test,n,hwe,nSamples)
+    p3=power(tab = hwe,test,n,nSamples)
   }
   
   #power of bootstrap test, conditional distance
@@ -57,7 +57,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
     }
     
     set.seed(11072019)
-    p4=power(test,n,hwe,nSamples)
+    p4=power(tab = hwe,test,n,nSamples)
   }
   
   
@@ -89,18 +89,21 @@ powerSensitivity<-function(tab, eps, nSamples,selector){
   set.seed(01082019)
   points=lapply(i,rp,p,n)
 
-  sapply(points, powerAtHWE,eps=eps,nSamples=nSamples,selector=selector, n=n)
+  res=sapply(points, powerAtHWE,eps=eps,nSamples=nSamples,selector=selector, n=n)
+  res=t(res)
+  colnames(res)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+  return(res)
 }
 
 # power at sample1
-#sizeSample1=matrix(data=NA, nrow=10, ncol=5)
-#colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
-
-#sizeSample1[1,]=powerAtPoint(example1,0.12,1000,c(TRUE,TRUE,TRUE,TRUE))
-#sizeSample1[2,]=powerAtPoint(example1,0.10,1000,c(TRUE,TRUE,TRUE,TRUE)) 
-#sizeSample1[3,]=powerAtPoint(example1,0.09,1000,c(TRUE,TRUE,TRUE,TRUE)) 
-#sizeSample1[4,]=powerAtPoint(example1,0.08,1000,c(TRUE,TRUE,TRUE,TRUE)) 
-#sizeSample1[5,]=powerAtPoint(example1,0.07,1000,c(TRUE,TRUE,TRUE,TRUE)) 
+# sizeSample1=matrix(data=NA, nrow=10, ncol=5)
+# colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+# 
+# sizeSample1[1,]=powerAtPoint(example1,0.12,1000,c(TRUE,FALSE,FALSE,FALSE))
+# sizeSample1[2,]=powerAtPoint(example1,0.10,1000,c(TRUE,TRUE,TRUE,TRUE)) 
+# sizeSample1[3,]=powerAtPoint(example1,0.09,1000,c(TRUE,TRUE,TRUE,TRUE)) 
+# sizeSample1[4,]=powerAtPoint(example1,0.08,1000,c(TRUE,TRUE,TRUE,TRUE)) 
+# sizeSample1[5,]=powerAtPoint(example1,0.07,1000,c(TRUE,TRUE,TRUE,TRUE)) 
 
 #write.table(sizeSample1, "sizeSample1.txt")
 
@@ -142,14 +145,14 @@ powerSensitivity<-function(tab, eps, nSamples,selector){
 # 
 # write.table(sizeSample4, "sizeSample4.txt")
 
-sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
-write.table(sensi_example1,"sensi_example1.txt")
-
-sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
-write.table(sensi_example2,"sensi_example2.txt")
-
-sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
-write.table(sensi_example3,"sensi_example3.txt")
-
-sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
-write.table(sensi_example4,"sensi_example4.txt")
+# sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000, selector = c(TRUE,FALSE,FALSE,FALSE))
+# write.table(sensi_example1,"sensi_example1.txt")
+# 
+# sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
+# write.table(sensi_example2,"sensi_example2.txt")
+# 
+# sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
+# write.table(sensi_example3,"sensi_example3.txt")
+# 
+# sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
+# write.table(sensi_example4,"sensi_example4.txt")

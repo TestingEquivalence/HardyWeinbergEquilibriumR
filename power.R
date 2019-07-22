@@ -19,7 +19,7 @@ closeRandomPoint<-function(tab, eps, distance){
   
 }
 
-closeBoundaryPoint<-function(tab,eps,distance){
+closeBoundaryPoint<-function(i,tab,eps,distance){
   p=closeRandomPoint(tab,eps,distance)
   n=sum(tab)
   tab=tab/n
@@ -37,5 +37,115 @@ closeBoundaryPoint<-function(tab,eps,distance){
   return(res)
 }
 
-# closeRandomPoint(example1,0.1, cond_l2)
-# closeBoundaryPoint(example1,0.1,cond_l2)
+powerConditionalDistanceAsymptotic<-function(tab, nSamples){
+  i=c(1:100)
+  set.seed(01082019)
+  alpha=0.05
+  n=sum(tab)
+  
+  eps=cond_l2(tab/n)
+  
+  #generate close boundary points
+  boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,distance=cond_l2)
+  
+  #power of the asymptotic test for conditional distance
+  test<-function(point){
+    minEps=asymptotic_test_conditional(point,alpha)
+    return(minEps<=eps)
+  }
+  
+  sapply(boundaryPoints,power,test,n, nSamples)
+}
+
+powerConditionalDistanceBootstrap<-function(tab, nSamples){
+  i=c(1:5)
+  set.seed(01082019)
+  alpha=0.05
+  n=sum(tab)
+  
+  eps=cond_l2(tab/n)
+  
+  #generate close boundary points
+  boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,distance=cond_l2)
+  
+  #power of the bootstrap test for conditional distance
+  test<-function(point){
+    bootstrap_test_conditional(tab=point,alpha,eps)
+  }
+  
+  sapply(boundaryPoints,power,test,n, nSamples)
+}
+
+
+powerMinimumDistanceAsymptotic<-function(tab, nSamples){
+  i=c(1:100)
+  set.seed(01082019)
+  alpha=0.05
+  n=sum(tab)
+  
+  eps=min_l2(tab/n)
+  
+  #generate close boundary points
+  boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,distance=min_l2)
+  
+  #power of the asymptotic test for conditional distance
+  test<-function(point){
+    minEps=asymptotic_test_minimum(point,alpha)
+    return(minEps<=eps)
+  }
+  
+  sapply(boundaryPoints,power,test,n, nSamples)
+}
+
+powerMinimumDistanceBootstrap<-function(tab, nSamples){
+  i=c(1:100)
+  set.seed(01082019)
+  alpha=0.05
+  n=sum(tab)
+  
+  eps=min_l2(tab/n)
+  
+  #generate close boundary points
+  boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,distance=min_l2)
+  
+  #power of the asymptotic test for conditional distance
+  test<-function(point){
+    bootstrap_test_minimum(tab=point,alpha,eps)
+  }
+  
+  sapply(boundaryPoints,power,test,n, nSamples)
+}
+
+boundaryPower<-function(tab, nSamples, selector){
+  asy_cond=rep(NA,100)
+  bst_cond=rep(NA,100)
+  asy_min=rep(NA,100)
+  bst_min=rep(NA,100)
+  
+  
+  if (selector[1]){
+    asy_cond=powerConditionalDistanceAsymptotic(tab,nSamples)
+    print("asympt. cond. done!")
+  }
+  
+  if (selector[2]){
+    bst_cond=powerConditionalDistanceBootstrap(tab,nSamples)
+    print("bst. cond. done!")
+  }
+  
+  if (selector[3]){
+    asy_min=powerMinimumDistanceAsymptotic(tab, nSamples)
+    print("asympt. min. done!")
+  }
+  
+  if (selector[4])
+  bst_min=powerMinimumDistanceBootstrap(tab,nSamples)
+  print("asympt. min. done!")
+  
+  df=data.frame(asy_cond, bst_cnd, asy_min, bst_min)
+  return(df)
+}
+
+powerExample1=boundaryPower(example1,1000,c(TRUE,FALSE,FALSE,FALSE))
+
+

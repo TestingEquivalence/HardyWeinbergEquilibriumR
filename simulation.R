@@ -23,7 +23,7 @@ sample<-function(i,tab,n){
   return(m)
 }
 
-power<-function(test, n, tab, nSamples ){
+power<-function(tab, test, n,  nSamples ){
   source("distance.R")
   source("asymptotic_test.R")
   source("bootstrap_test.R")
