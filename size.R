@@ -4,7 +4,7 @@ source("bootstrap_test.R")
 source("data_sets.R")
 source("simulation.R")
 
-powerAtHWE<-function(p,n,eps,nSamples,selector){
+powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation){
   alpha=0.05
   hwe=p2hwe(p)
   
@@ -12,6 +12,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
   p1=0
   
   if (selector[1]){
+    
     test<-function(tab){
       minEps=asymptotic_test_conditional(tab,alpha)
       return(minEps<=eps)
@@ -26,9 +27,10 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
   
   if (selector[2]){
     test<-function(tab){
-      res=bootstrap_test_conditional(tab,alpha, eps=eps)
+      res=bootstrap_test_conditional(tab,alpha,nSimulation,eps = eps)
       return(res$result)
     }
+  
     
     set.seed(11072019)
     p2=power(tab = hwe,test,n,nSamples)
@@ -52,7 +54,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
   
   if (selector[4]){
     test<-function(tab){
-      res=bootstrap_test_minimum(tab,alpha, eps=eps)
+      res=bootstrap_test_minimum(tab,alpha, eps=eps, nSimulation = nSimulation)
       return(res$result)
     }
     
@@ -68,7 +70,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector){
 powerAtPoint<-function(tab, eps, nSamples, selector){
   n=sum(tab)
   p=startValue(tab/n)
-  powerAtHWE(p,n,eps,nSamples,selector)
+  powerAtHWE(p,n,eps,nSamples,selector,10000)
 }
 
 
@@ -79,7 +81,7 @@ rp<-function(i,p,n){
 
 
 # power sensitivity
-powerSensitivity<-function(tab, eps, nSamples,selector){
+powerSensitivity<-function(tab, eps, nSamples,selector,nSimulation){
   n=sum(tab)
   p=startValue(tab/n)
   
@@ -88,9 +90,16 @@ powerSensitivity<-function(tab, eps, nSamples,selector){
   
   set.seed(01082019)
   points=lapply(i,rp,p,n)
+  
+  j=1
+  res=matrix(data = NA, nrow=100, ncol=5)
+  
+  for (point in points){
+    res[j,]=powerAtHWE(p=point,n,eps,nSamples,selector,nSimulation)
+    print(paste(j, " point done"))
+    j=j+1
+  }
 
-  res=sapply(points, powerAtHWE,eps=eps,nSamples=nSamples,selector=selector, n=n)
-  res=t(res)
   colnames(res)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
   return(res)
 }
@@ -144,9 +153,11 @@ powerSensitivity<-function(tab, eps, nSamples,selector){
 # 
 # 
 # write.table(sizeSample4, "sizeSample4.txt")
-
-# sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000, selector = c(TRUE,FALSE,FALSE,FALSE))
-# write.table(sensi_example1,"sensi_example1.txt")
+# 
+#  sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000,
+#                                  selector = c(TRUE,FALSE,TRUE,FALSE),
+#                                  nSimulation = 1000)
+#  write.table(sensi_example1,"sensi_example1.txt")
 # 
 # sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
 # write.table(sensi_example2,"sensi_example2.txt")
