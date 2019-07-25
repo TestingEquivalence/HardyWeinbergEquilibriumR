@@ -37,7 +37,7 @@ closeBoundaryPoint<-function(i,tab,eps,distance){
   return(res)
 }
 
-powerAtBoundary<-function(tab, nSamples,distance,bootstrap){
+powerAtBoundary<-function(tab, nSamples,distance,bootstrap, nSimulation){
   i=c(1:100)
   set.seed(01082019)
   alpha=0.05
@@ -52,7 +52,7 @@ powerAtBoundary<-function(tab, nSamples,distance,bootstrap){
     if (bootstrap){
       #power of the bootstrap test for conditional distance
       test<-function(point){
-        bootstrap_test_conditional(tab=point,alpha,eps)
+        bootstrap_test_conditional(tab=point,alpha,eps, nSimulation)
       }
     }
     else{
@@ -67,21 +67,36 @@ powerAtBoundary<-function(tab, nSamples,distance,bootstrap){
   if (identical(distance,min_l2)){
     if (bootstrap){
       
+      #power of the bootstrap test for minimum distance
+      test<-function(point){
+        bootstrap_test_minimum(tab=point,alpha,eps, nSimulation)
+      }
     }
     else{
-      
+      #power of the asymptotic test for minimum distance
+      test<-function(point){
+        minEps=asymptotic_test_minimum(point,alpha)
+        return(minEps<=eps)
+      }
     }
-    
   }
   
+  j=1
+  res=rep(NA,100)
   
-  sapply(boundaryPoints,power,test,n, nSamples)
+  for (point in boundaryPoints){
+    res[j]=power(point,test,n,nSamples)
+    print(paste(j, " point done"))
+    j=j+1
+  }
+  
+  return(res)
 }
 
 
 
 
-boundaryPower<-function(tab, nSamples, selector){
+boundaryPower<-function(tab, nSamples, selector,nSimulation){
   asy_cond=rep(NA,100)
   bst_cond=rep(NA,100)
   asy_min=rep(NA,100)
@@ -89,28 +104,41 @@ boundaryPower<-function(tab, nSamples, selector){
   
   
   if (selector[1]){
-    asy_cond=powerConditionalDistanceAsymptotic(tab,nSamples)
+    asy_cond=powerAtBoundary(tab,nSamples,distance = cond_l2,bootstrap = FALSE, nSimulation)
     print("asympt. cond. done!")
   }
   
   if (selector[2]){
-    bst_cond=powerConditionalDistanceBootstrap(tab,nSamples)
+    bst_cond=powerAtBoundary(tab,nSamples,distance = cond_l2,bootstrap = TRUE, nSimulation)
     print("bst. cond. done!")
   }
   
   if (selector[3]){
-    asy_min=powerMinimumDistanceAsymptotic(tab, nSamples)
+    asy_min=powerAtBoundary(tab,nSamples,distance =min_l2,bootstrap = FALSE, nSimulation)
     print("asympt. min. done!")
   }
   
-  if (selector[4])
-  bst_min=powerMinimumDistanceBootstrap(tab,nSamples)
-  print("asympt. min. done!")
+  if (selector[4]){
+    bst_min=powerAtBoundary(tab,nSamples,distance = min_l2,bootstrap = TRUE, nSimulation)
+    print("bst. min. done!")
+  }
   
-  df=data.frame(asy_cond, bst_cnd, asy_min, bst_min)
+  df=data.frame(asy_cond, bst_cond, asy_min, bst_min)
   return(df)
 }
 
 powerExample1=boundaryPower(example1,1000,c(TRUE,FALSE,FALSE,FALSE))
+write.table(powerExample1,"powerExample1.txt")
+
+powerExample2=boundaryPower(example2,1000,c(TRUE,FALSE,FALSE,FALSE))
+write.table(powerExample2,"powerExample2.txt")
+
+powerExample3=boundaryPower(example3,1000,c(TRUE,FALSE,FALSE,FALSE))
+write.table(powerExample3,"powerExample3.txt")
+
+powerExample4=boundaryPower(example4,1000,c(TRUE,FALSE,FALSE,FALSE))
+write.table(powerExample4,"powerExample4.txt")
+
+
 
 

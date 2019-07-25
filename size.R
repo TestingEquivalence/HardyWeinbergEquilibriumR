@@ -154,16 +154,18 @@ powerSensitivity<-function(tab, eps, nSamples,selector,nSimulation){
 # 
 # write.table(sizeSample4, "sizeSample4.txt")
 # 
-#  sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000,
-#                                  selector = c(TRUE,FALSE,TRUE,FALSE),
-#                                  nSimulation = 1000)
-#  write.table(sensi_example1,"sensi_example1.txt")
+ # sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000,
+ #                                 selector = c(TRUE,FALSE,TRUE,FALSE),
+ #                                 nSimulation = 1000)
+ # write.table(sensi_example1,"sensi_example1.txt")
 # 
-# sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
+# sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples = 1000,
+#                                 selector = c(TRUE,FALSE,TRUE,FALSE),
+#                                 nSimulation = 1000)
 # write.table(sensi_example2,"sensi_example2.txt")
 # 
-# sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
-# write.table(sensi_example3,"sensi_example3.txt")
+sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
+write.table(sensi_example3,"sensi_example3.txt")
 # 
 # sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples = 1000, selector = c(TRUE,TRUE,TRUE,TRUE))
 # write.table(sensi_example4,"sensi_example4.txt")
