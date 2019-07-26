@@ -127,16 +127,20 @@ boundaryPower<-function(tab, nSamples, selector,nSimulation){
   return(df)
 }
 
-powerExample1=boundaryPower(example1,1000,c(TRUE,FALSE,FALSE,FALSE))
+powerExample1=boundaryPower(tab=example1, nSamples =  1000,
+                            selector = c(TRUE,FALSE,FALSE,FALSE), nSimulation =  1000)
 write.table(powerExample1,"powerExample1.txt")
 
-powerExample2=boundaryPower(example2,1000,c(TRUE,FALSE,FALSE,FALSE))
+powerExample2=boundaryPower(tab=example2, nSamples =  1000,
+                            selector=c(TRUE,FALSE,FALSE,FALSE),nSimulation =  1000)
 write.table(powerExample2,"powerExample2.txt")
 
-powerExample3=boundaryPower(example3,1000,c(TRUE,FALSE,FALSE,FALSE))
+powerExample3=boundaryPower(tab=example3, nSamples =  1000,
+                            selector =  c(TRUE,FALSE,FALSE,FALSE), nSimulation =  1000)
 write.table(powerExample3,"powerExample3.txt")
 
-powerExample4=boundaryPower(example4,1000,c(TRUE,FALSE,FALSE,FALSE))
+powerExample4=boundaryPower(tab=example4, nSamples =  1000,
+                            selector =  c(TRUE,FALSE,FALSE,FALSE), nSimulation = 1000)
 write.table(powerExample4,"powerExample4.txt")
 
 
