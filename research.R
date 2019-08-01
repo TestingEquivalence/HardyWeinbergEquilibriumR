@@ -76,25 +76,57 @@ sizeSample4[4,]=powerAtPoint(example4,0.03,nSamples,selector)
 
 write.table(sizeSample4, "sizeSample4.txt")
 
-# Next we investigate if the type II error is sensitive to the allele distribution.
+# Next we investigate if the type II error is sensitive to the allele distribution,
+# because the true allele distribution is unknown and the estimator is subject to
+# sampling error.
 # For this porpose we estimate the allele distribution from the counting data.
-# Then the random samples from the allele distribution are generated
+# Then the random samples from the allele distribution are generated and the sample size
+# equals theses of the iriginal data set. We generate 100 random samples which is sufficient
+# for the considered data sets, because the test power vary very little from point to point.
+# Then the test power is computed for each random sample under assumption of Hardy Weinberg equilibrium.
 
-# sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples = 1000,
-#                                 selector = c(TRUE,FALSE,TRUE,FALSE),
-#                                 nSimulation = 1000)
-# write.table(sensi_example1,"sensi_example1.txt")
-# 
-# sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples = 1000,
-#                                 selector = c(TRUE,FALSE,TRUE,FALSE),
-#                                 nSimulation = 1000)
-# write.table(sensi_example2,"sensi_example2.txt")
-# 
-# sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples = 1000, 
-#                                 selector = c(TRUE,FALSE,TRUE,FALSE),
-#                                 nSimulation = 1000)
-# write.table(sensi_example3,"sensi_example3.txt")
-# 
-# sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples = 1000, 
-#                                 selector = c(TRUE,FALSE,TRUE,FALSE))
-# write.table(sensi_example4,"sensi_example4.txt")
+# The number of bootstrap simulations is set to 1000 instead of 10000 in order to
+# make power calcualation numerically feasible.
+nSimulation=1000
+
+sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples,selector,nSimulation)
+write.table(sensi_example1,"sensi_example1.txt")
+
+sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples,selector,nSimulation)
+write.table(sensi_example2,"sensi_example2.txt")
+
+sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples,selector,nSimulation)
+write.table(sensi_example3,"sensi_example3.txt")
+
+sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples,selector,nSimulation)
+write.table(sensi_example4,"sensi_example4.txt")
+
+# The I. type  error is an important measure of the test quality and in the best case it should 
+# not exceed the confidence level alpha.
+# The I. type eroor is the maximum of the test power over the boundary of H0.
+# In our case the boundary of H0 is a very complex set and the I. type error can not be estimated exactly.
+# Instead we generate the random boundary points, which are close to the sample distribution.
+# The test power at these boundary points provides a good insight into the test behavior at the bondary 
+# of H0 and is a best practice estimate for the I.type error.
+# The boundary points are generated as follows:
+# - Random sample from original sata set is generated usind common bootstrap resampling.
+# - If the distance between random sample and Hardy Weinberg equilibrium is smaller than epsilon,
+#   we reject the random sample and repeat previous step.
+# - We build a linear combination between the random sample and corresponding Hardy Weinberg equilibrium
+#   point. 
+#   The corresponding Hardy Weinberg equilibrium point depends on distance, which is used for testing.
+# - The weight of the linear combination is adjusted such that 
+#   the linear combination  is at the boundary of H0.
+
+powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation)
+write.table(powerExample1,"powerExample1.txt")
+ 
+powerExample2=boundaryPower(tab=example2,nSamples,selector,nSimulation)
+write.table(powerExample2,"powerExample2.txt")
+ 
+powerExample3=boundaryPower(tab=example3,nSamples,selector,nSimulation)
+write.table(powerExample3,"powerExample3.txt")
+ 
+powerExample4=boundaryPower(tab=example4,nSamples,selector,nSimulation)
+write.table(powerExample4,"powerExample4.txt")
+
