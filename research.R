@@ -24,7 +24,7 @@ nSamples=1000
 # selector[4] for the bootstrap test based on the minimum distance
 # Note that the power calculation needs a very long time (days) for the bootstrap tests.
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(TRUE,FALSE,FALSE,FALSE)
+selector=c(FALSE,TRUE,TRUE,TRUE)
 
 #power at sample1
 sizeSample1=matrix(data=NA, nrow=10, ncol=5)
@@ -87,6 +87,7 @@ write.table(sizeSample4, "sizeSample4.txt")
 
 # The number of bootstrap simulations is set to 1000 instead of 10000 in order to
 # make power calcualation numerically feasible.
+
 nSimulation=1000
 
 sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples,selector,nSimulation)

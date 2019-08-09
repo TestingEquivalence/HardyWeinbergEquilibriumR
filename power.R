@@ -43,16 +43,18 @@ powerAtBoundary<-function(tab, nSamples,distance,bootstrap, nSimulation,cl){
   alpha=0.05
   n=sum(tab)
   
-  eps=cond_l2(tab/n)
-  
   #generate close boundary points
+  eps=distance(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,distance)
   
+  
   if (identical(distance,cond_l2)){
+
     if (bootstrap){
       #power of the bootstrap test for conditional distance
       test<-function(point){
-        bootstrap_test_conditional(tab=point,alpha,eps, nSimulation)
+        res=bootstrap_test_conditional(tab = point,alpha=alpha,eps = eps, nSimulation = nSimulation)
+        return(res)
       }
     }
     else{
@@ -65,11 +67,13 @@ powerAtBoundary<-function(tab, nSamples,distance,bootstrap, nSimulation,cl){
   }
   
   if (identical(distance,min_l2)){
+    
     if (bootstrap){
       
       #power of the bootstrap test for minimum distance
       test<-function(point){
-        bootstrap_test_minimum(tab=point,alpha,eps, nSimulation)
+        res=bootstrap_test_minimum(tab = point,alpha=alpha,eps = eps, nSimulation = nSimulation)
+        return(res)
       }
     }
     else{
