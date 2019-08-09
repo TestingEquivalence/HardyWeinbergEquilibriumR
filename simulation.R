@@ -26,7 +26,7 @@ sample<-function(i,tab,n){
   return(m)
 }
 
-power<-function(tab, test, n,  nSamples, cl ){
+power<-function(tab, test, n,  nSamples, cl){
   i=c(1:nSamples)
   sampleList=lapply(i, sample, tab,n)
   v=parSapply(cl,sampleList, test)
