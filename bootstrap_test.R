@@ -120,7 +120,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   
   #number of search directions and seed
   if (nExteriorPoints==0) 
-    nExteriorPoints=nrow(tab)*50
+    nExteriorPoints=nrow(tab)*50*4
   
   set.seed(10071977)
   
@@ -184,7 +184,7 @@ bootstrap_test_minimum<-function(tab, alpha,
   
   #number of search directions and seed
   if (nExteriorPoints==0) 
-    nExteriorPoints=nrow(tab)*50
+    nExteriorPoints=nrow(tab)*50*4
   
   set.seed(10071977)
   
