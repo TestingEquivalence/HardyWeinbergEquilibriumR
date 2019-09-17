@@ -1,6 +1,6 @@
 source("distance.R")
 source("asymptotic_test.R")
-source("bootstrap_test.R")
+source("bootstrap_test2.R")
 source("data_sets.R")
 
 # significance level
@@ -85,3 +85,4 @@ results_minimum_distance[4,3]=bootstrap_test_minimum(example4,alpha)
  
 write.table(results_conditional_distance,"results_conditional_distance.txt")
 write.table(results_minimum_distance,"results_minimum_distance.txt")
+
