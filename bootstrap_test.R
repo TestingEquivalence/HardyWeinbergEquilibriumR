@@ -54,7 +54,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   #or set it eps if provided
   beps=eps
   if (eps==0)
-    beps=asymptotic_test_conditional(tab,alpha)*1.2
+    beps=asymptotic_test_conditional(tab,alpha)*1.5
   
   
   

@@ -19,23 +19,6 @@ randomExteriorPoint<-function(tab, eps, distance){
   }
 }
 
-linComb<-function(x,y,a){
-  return((1-a)*x+a*y) 
-}
-
-linearBoundaryPoint<-function(p,q,eps,distance){
-  aim<-function(a){
-    lc=linComb(p,q,a)
-    dst=distance(lc)
-    return(dst-eps)
-  }
-  
-  aMin=uniroot(aim, c(0,1))
-  return(linComb(p,q,aMin$root))
-}
-
-
-
 protoBstTest<-function(tab,n,distance,eps,exteriorPoints,nSimulation){
   #calculate test statistic
   t=distance(tab)

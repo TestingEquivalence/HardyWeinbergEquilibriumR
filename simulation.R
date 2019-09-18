@@ -10,10 +10,11 @@ getCluster<-function(){
 
   # Initiate cluster
   cl <- makeCluster(no_cores,'SOCK')
-  clusterExport(cl,c("asymptotic_test_conditional","cond_l22_da","asympt_stdev","cond_l22", "l22",
-                   "derivative_cond_l22", "bootstrap_test_conditional", "randomExteriorPoint",
-                   "startValue","triangle","product","cond_l22_db","randomPoint","protoBstTest",
-                   "linearBoundaryPoint", "linComb","asymptotic_test_minimum","min_l22","fn",
+  clusterExport(cl,c("asymptotic_test_conditional","cond_l22_da","asympt_stdev",
+                     "cond_l22", "l22","linComb","linearBoundaryPoint",
+                   "derivative_cond_l22", "bootstrap_test_conditional", 
+                   "startValue","triangle","product","cond_l22_db","protoBstTest",
+                   "asymptotic_test_minimum","min_l22","fn","cond_l2",
                    "p2triangle","l22_first_derivative","bootstrap_test_minimum"))
                 
   return(cl)

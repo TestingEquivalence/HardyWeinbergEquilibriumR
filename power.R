@@ -4,6 +4,22 @@ source("bootstrap_test.R")
 source("data_sets.R")
 source("simulation.R")
 
+linComb<-function(x,y,a){
+  return((1-a)*x+a*y) 
+}
+
+linearBoundaryPoint<-function(p,q,eps,distance){
+  aim<-function(a){
+    lc=linComb(p,q,a)
+    dst=distance(lc)
+    return(dst-eps)
+  }
+  
+  aMin=uniroot(aim, c(0,1))
+  return(linComb(p,q,aMin$root))
+}
+
+
 closeRandomPoint<-function(tab, eps, distance){
   n=sum(tab)
   tab=tab/n
