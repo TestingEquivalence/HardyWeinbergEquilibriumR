@@ -3,7 +3,7 @@ source("asymptotic_test.R")
 
 protoBstTest<-function(tab,n,distance,eps,nSimulation){
   #calculate test statistic
-  t=distance(tab)
+  #t=distance(tab)
   
   #simulate bootstrap sample
   i=c(1:nSimulation)
@@ -18,7 +18,7 @@ protoBstTest<-function(tab,n,distance,eps,nSimulation){
   sample=lapply(i,f)
   
   #bootstrap test
-  pValue=sum(sample<t)/nSimulation
+  pValue=sum(sample>eps)/nSimulation
   return(pValue)
 }
 
@@ -54,7 +54,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   #or set it eps if provided
   beps=eps
   if (eps==0)
-    beps=asymptotic_test_conditional(tab,alpha)*1.1
+    beps=asymptotic_test_conditional(tab,alpha)*1.2
   
   
   
@@ -64,8 +64,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   set.seed(10071977)
   
   distance<-function(x){
-    dst=cond_l22(x)
-    return(sqrt(dst))
+    cond_l2(x)
   }
   
   # if epsilon given, make short-cut and

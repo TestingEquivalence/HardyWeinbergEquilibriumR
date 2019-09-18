@@ -1,6 +1,6 @@
 source("distance.R")
 source("asymptotic_test.R")
-source("bootstrap_test2.R")
+source("bootstrap_test.R")
 source("data_sets.R")
 
 # significance level
