@@ -24,7 +24,7 @@ nSamples=1000
 # selector[4] for the bootstrap test based on the minimum distance
 # Note that the power calculation needs a very long time (days) for the bootstrap tests.
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(FALSE,TRUE,TRUE,TRUE)
+selector=c(TRUE,TRUE,FALSE,FALSE)
 
 #power at sample1
 sizeSample1=matrix(data=NA, nrow=10, ncol=5)
@@ -81,14 +81,14 @@ write.table(sizeSample4, "sizeSample4.txt")
 # sampling error.
 # For this porpose we estimate the allele distribution from the counting data.
 # Then the random samples from the allele distribution are generated and the sample size
-# equals theses of the iriginal data set. We generate 100 random samples which is sufficient
+# equals these of the original data set. We generate 100 random samples which is sufficient
 # for the considered data sets, because the test power vary very little from point to point.
 # Then the test power is computed for each random sample under assumption of Hardy Weinberg equilibrium.
 
-# The number of bootstrap simulations is set to 1000 instead of 10000 in order to
+# The number of bootstrap simulations is set to 2000 instead of 10000 in order to
 # make power calcualation numerically feasible.
 
-nSimulation=1000
+nSimulation=2000
 
 sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples,selector,nSimulation)
 write.table(sensi_example1,"sensi_example1.txt")
@@ -120,8 +120,8 @@ write.table(sensi_example4,"sensi_example4.txt")
 #   the linear combination  is at the boundary of H0.
 
 nSamples=1000
-nSimulation=1000
-selector=c(TRUE,FALSE,FALSE,FALSE)
+nSimulation=2000
+selector=c(TRUE,TRUE,FALSE,FALSE)
 
 powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation)
 write.table(powerExample1,"powerExample1.txt")
