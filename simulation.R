@@ -15,7 +15,8 @@ getCluster<-function(){
                    "derivative_cond_l22", "bootstrap_test_conditional", 
                    "startValue","triangle","product","cond_l22_db","protoBstTest",
                    "asymptotic_test_minimum","min_l22","fn","cond_l2",
-                   "p2triangle","l22_first_derivative","bootstrap_test_minimum"))
+                   "p2triangle","l22_first_derivative","bootstrap_test_minimum",
+                   "closeRandomPoint"))
                 
   return(cl)
 }
