@@ -1,56 +1,23 @@
 source("distance.R")
 source("asymptotic_test.R")
 
-linComb<-function(x,y,a){
-  return((1-a)*x+a*y) 
+randomPoint<-function(tab){
+  #erzeuge hier diagonal matrix 
+  size=nrow(tab)*ncol(tab)
+  x=runif(size,0,1)
+  x=x/sum(x)
+  m=matrix(data=x,nrow=nrow(tab), ncol=ncol(tab),byrow = TRUE)
+  m=triangle(m)
+  return(m)
 }
 
-linearBoundaryPoint<-function(p,q,eps,distance){
-  aim<-function(a){
-    lc=linComb(p,q,a)
-    dst=distance(lc)
-    return(dst-eps)
-  }
-  
-  aMin=uniroot(aim, c(0,1))
-  return(linComb(p,q,aMin$root))
-}
-
-
-closeRandomPoint<-function(tab, eps, distance){
-  n=sum(tab)
-  tab=tab/n
-  
+randomExteriorPoint<-function(tab, eps, distance){
   repeat{
-    rtab=as.vector(tab)
-    v=rmultinom(n=1,size=n,prob=rtab)
-    v=v/n
-    m=matrix(data=v,nrow=nrow(tab), ncol=ncol(tab))
-    t=distance(m)
-    if (!is.na(t))
-      if (t>eps) return(m)
+    m = randomPoint(tab)
+    t= distance(m)
+    if (t>eps) return(m)
   }
-  
 }
-
-closeBoundaryPoint<-function(i,tab,eps,distance){
-  p=closeRandomPoint(tab,eps,distance)
-  n=sum(tab)
-  tab=tab/n
-  
-  if (identical(distance,cond_l2)){
-    q=p2triangle(startValue(tab))
-  }
-  
-  if (identical(distance,min_l2)){
-    q=min_l22(tab)$par
-    q=p2triangle(q)
-  }
-  
-  res=linearBoundaryPoint(p,q,eps,distance)
-  return(res)
-}
-
 
 protoBstTest<-function(tab,n,distance,eps,exteriorPoints,nSimulation){
   #calculate test statistic
@@ -136,13 +103,18 @@ bootstrap_test_conditional<-function(tab, alpha,
   
   #number of search directions and seed
   if (nExteriorPoints==0) 
-    nExteriorPoints=nrow(tab)*50
+    nExteriorPoints=nrow(tab)*50*4
   
   set.seed(10071977)
   
+  distance<-function(x){
+    dst=cond_l22(x)
+    return(sqrt(dst))
+  }
+  
   #calculate exterior points
   f<-function(x){
-    closeRandomPoint(tab,beps,cond_l2)
+    randomExteriorPoint(tab,beps,distance)
   }
   
   i=c(1:nExteriorPoints)
@@ -151,7 +123,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   # if epsilon given, make short-cut and
   # calculate the logical value only
   if (eps>0){
-    pval=protoBstTest(tab,n,cond_l2,eps,exteriorPoints,nSimulation)
+    pval=protoBstTest(tab,n,distance,eps,exteriorPoints,nSimulation)
     l=pval<=alpha
     ls=list(p_value=pval,result=l)
     return(ls)
@@ -161,7 +133,7 @@ bootstrap_test_conditional<-function(tab, alpha,
   #calculate min epsilon
   ff<-function(x){
     set.seed(01012019)
-    pval=protoBstTest(tab,n,cond_l2,eps = x,exteriorPoints,nSimulation)
+    pval=protoBstTest(tab,n,distance,eps = x,exteriorPoints,nSimulation)
     pval-alpha
   }
   
@@ -195,13 +167,18 @@ bootstrap_test_minimum<-function(tab, alpha,
   
   #number of search directions and seed
   if (nExteriorPoints==0) 
-    nExteriorPoints=nrow(tab)*50
+    nExteriorPoints=nrow(tab)*50*4
   
   set.seed(10071977)
   
+  distance<-function(x){
+    res=min_l22(x)
+    return(sqrt(res$val))
+  }
+  
   #calculate exterior points
   f<-function(x){
-    closeRandomPoint(tab,beps,min_l2)
+    randomExteriorPoint(tab,beps,distance)
   }
   
   i=c(1:nExteriorPoints)
@@ -210,7 +187,7 @@ bootstrap_test_minimum<-function(tab, alpha,
   # if epsilon given, make short-cut and
   # calculate the logical value only
   if (eps>0){
-    pval=protoBstTest(tab,n,min_l2,eps,exteriorPoints,nSimulation)
+    pval=protoBstTest(tab,n,distance,eps,exteriorPoints,nSimulation)
     l=pval<=alpha
     return(list(p_value=pval,result=l))
   }
@@ -218,7 +195,7 @@ bootstrap_test_minimum<-function(tab, alpha,
   #calculate min epsilon
   ff<-function(x){
     set.seed(01012019)
-    pval=protoBstTest(tab,n,min_l2,eps = x,exteriorPoints,nSimulation)
+    pval=protoBstTest(tab,n,distance,eps = x,exteriorPoints,nSimulation)
     pval-alpha
   }
   

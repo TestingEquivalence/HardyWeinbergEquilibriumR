@@ -21,7 +21,7 @@ example2 = matrix(data=c(2, 0, 0, 0,
 
 # 3. example
 # Genotype frequency data at Rhesus locus. 
-# Alle 7 and 8 are delited from the matrix because 
+# Alle  7 and 8 are delited from the matrix because 
 # rarely observed (14 and 2 times)
 # Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
 # The Genetics of Hutman Populations. San Francisco: W. H. Freeman
