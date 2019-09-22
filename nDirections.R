@@ -5,7 +5,7 @@ source("data_sets.R")
 
 # significance level
 alpha=0.05
-nBstSamples=10000
+nBstSamples=2000
 
 #table of tests results for the conditional distance
 nDir_cond_dst=matrix(data=NA, nrow=7,ncol=4)

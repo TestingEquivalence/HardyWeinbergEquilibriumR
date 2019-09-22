@@ -26,15 +26,21 @@ nSamples=1000
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
 selector=c(FALSE,TRUE,FALSE,FALSE)
 
+
+# The number of bootstrap simulations is set to 2000 instead of 10000 in order to
+# make power calcualation numerically feasible.
+nSimulation=2000
+
+
 #power at sample1
 sizeSample1=matrix(data=NA, nrow=10, ncol=5)
 colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
 
-sizeSample1[1,]=powerAtPoint(example1,0.12,nSamples,selector)
-sizeSample1[2,]=powerAtPoint(example1,0.10,nSamples,selector)
-sizeSample1[3,]=powerAtPoint(example1,0.09,nSamples,selector)
-sizeSample1[4,]=powerAtPoint(example1,0.08,nSamples,selector)
-sizeSample1[5,]=powerAtPoint(example1,0.07,nSamples,selector)
+sizeSample1[1,]=powerAtPoint(example1,0.12,nSamples,selector,nSimulation)
+sizeSample1[2,]=powerAtPoint(example1,0.10,nSamples,selector,nSimulation)
+sizeSample1[3,]=powerAtPoint(example1,0.09,nSamples,selector,nSimulation)
+sizeSample1[4,]=powerAtPoint(example1,0.08,nSamples,selector,nSimulation)
+sizeSample1[5,]=powerAtPoint(example1,0.07,nSamples,selector,nSimulation)
 
 write.table(sizeSample1, "sizeSample1.txt")
 
@@ -42,11 +48,11 @@ write.table(sizeSample1, "sizeSample1.txt")
 sizeSample2=matrix(data=NA, nrow=10, ncol=5)
 colnames(sizeSample2)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
 
-sizeSample2[1,]=powerAtPoint(example2,0.12,nSamples,selector)
-sizeSample2[2,]=powerAtPoint(example2,0.10,nSamples,selector)
-sizeSample2[3,]=powerAtPoint(example2,0.09,nSamples,selector)
-sizeSample2[4,]=powerAtPoint(example2,0.08,nSamples,selector)
-sizeSample2[5,]=powerAtPoint(example2,0.07,nSamples,selector)
+sizeSample2[1,]=powerAtPoint(example2,0.12,nSamples,selector,nSimulation)
+sizeSample2[2,]=powerAtPoint(example2,0.10,nSamples,selector,nSimulation)
+sizeSample2[3,]=powerAtPoint(example2,0.09,nSamples,selector,nSimulation)
+sizeSample2[4,]=powerAtPoint(example2,0.08,nSamples,selector,nSimulation)
+sizeSample2[5,]=powerAtPoint(example2,0.07,nSamples,selector,nSimulation)
 
 write.table(sizeSample2, "sizeSample2.txt")
 
@@ -54,11 +60,11 @@ write.table(sizeSample2, "sizeSample2.txt")
 sizeSample3=matrix(data=NA, nrow=10, ncol=5)
 colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
  
-sizeSample3[1,]=powerAtPoint(example3,0.018,nSamples,selector)
-sizeSample3[2,]=powerAtPoint(example3,0.016,nSamples,selector)
-sizeSample3[3,]=powerAtPoint(example3,0.014,nSamples,selector)
-sizeSample3[4,]=powerAtPoint(example3,0.012,nSamples,selector)
-sizeSample3[5,]=powerAtPoint(example3,0.010,nSamples,selector)
+sizeSample3[1,]=powerAtPoint(example3,0.018,nSamples,selector,nSimulation)
+sizeSample3[2,]=powerAtPoint(example3,0.016,nSamples,selector,nSimulation)
+sizeSample3[3,]=powerAtPoint(example3,0.014,nSamples,selector,nSimulation)
+sizeSample3[4,]=powerAtPoint(example3,0.012,nSamples,selector,nSimulation)
+sizeSample3[5,]=powerAtPoint(example3,0.010,nSamples,selector,nSimulation)
 
 
 write.table(sizeSample3, "sizeSample3.txt")
@@ -84,11 +90,6 @@ write.table(sizeSample4, "sizeSample4.txt")
 # equals these of the original data set. We generate 100 random samples which is sufficient
 # for the considered data sets, because the test power vary very little from point to point.
 # Then the test power is computed for each random sample under assumption of Hardy Weinberg equilibrium.
-
-# The number of bootstrap simulations is set to 2000 instead of 10000 in order to
-# make power calcualation numerically feasible.
-
-nSimulation=2000
 
 sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples,selector,nSimulation)
 write.table(sensi_example1,"sensi_example1.txt")

@@ -67,11 +67,11 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
 }
 
 # power of sample
-powerAtPoint<-function(tab, eps, nSamples, selector){
+powerAtPoint<-function(tab, eps, nSamples, selector,nSimulation){
   n=sum(tab)
   p=startValue(tab/n)
   cl=getCluster()
-  res=powerAtHWE(p,n,eps,nSamples,selector,10000,cl)
+  res=powerAtHWE(p,n,eps,nSamples,selector,nSimulation,cl)
   stopCluster(cl)
   return(res)
 }
