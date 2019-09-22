@@ -31,8 +31,8 @@ sample<-function(i,tab,n){
 power<-function(tab, test, n,  nSamples, cl){
   i=c(1:nSamples)
   sampleList=lapply(i, sample, tab,n)
-  #v=parSapply(cl,sampleList, test)
-  v=sapply(sampleList, test)
+  v=parSapply(cl,sampleList, test)
+  #v=sapply(sampleList, test)
   return(sum(v==TRUE)/nSamples)
 }
 
