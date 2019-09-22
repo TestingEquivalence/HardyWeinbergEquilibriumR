@@ -26,8 +26,9 @@ closeRandomPoint<-function(tab, eps, distance){
     v=rmultinom(n=1,size=n,prob=rtab)
     v=v/n
     m=matrix(data=v,nrow=nrow(tab), ncol=ncol(tab))
-    t= distance(m)
-    if (t>eps) return(m)
+    t=distance(m)
+    if (!is.na(t))
+      if (t>eps) return(m)
   }
   
 }
