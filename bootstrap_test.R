@@ -34,6 +34,11 @@ linearBoundaryPoint<-function(p,q,eps,distance){
   return(linComb(p,q,aMin$root))
 }
 
+randomBoundaryPoint<-function(i,tab,eps,distance){
+  p=randomExteriorPoint(tab,eps,distance)
+  lbp=linearBoundaryPoint(p,tab,eps,distance)
+  return(lbp)
+}
 
 
 protoBstTest<-function(tab,n,distance,eps,exteriorPoints,nSimulation){

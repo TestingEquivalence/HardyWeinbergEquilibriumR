@@ -24,7 +24,7 @@ nSamples=1000
 # selector[4] for the bootstrap test based on the minimum distance
 # Note that the power calculation needs a very long time (days) for the bootstrap tests.
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(FALSE,TRUE,FALSE,FALSE)
+selector=c(TRUE,TRUE,FALSE,FALSE)
 
 
 # The number of bootstrap simulations is set to 2000 instead of 10000 in order to
