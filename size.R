@@ -7,6 +7,7 @@ source("simulation.R")
 powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
   alpha=0.05
   tab=p2hwe(p)
+  nSimulation=1*nSimulation
   
   #power of asymptotic test, conditional distance
   p1=0
@@ -27,7 +28,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
   
   if (selector[2]){
     test<-function(tab){
-      res=bootstrap_test_conditional(tab,alpha,nSimulation,eps = eps)
+      res=bootstrap_test_conditional(tab,alpha,nSimulation,0,eps)
       return(res$result)
     }
   

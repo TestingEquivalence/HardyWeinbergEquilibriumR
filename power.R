@@ -48,6 +48,8 @@ powerAtBoundaryConditionalAsympt<-function(tab, nSamples, cl){
   #generate close boundary points
   eps=cond_l2(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,cond_l2)
+  #boundaryPoints=lapply(i, randomBoundaryPoint,tab,eps,min_l2)
+  
   
   #power of the asymptotic test for conditional distance
   test<-function(point){
@@ -76,6 +78,8 @@ powerAtBoundaryMinAsympt<-function(tab, nSamples, cl){
   #generate close boundary points
   eps=min_l2(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,min_l2)
+  #boundaryPoints=lapply(i, randomBoundaryPoint,tab,eps,min_l2)
+  
   
   #power of the asymptotic test for the minimum distance
   test<-function(point){

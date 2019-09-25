@@ -24,7 +24,7 @@ nSamples=1000
 # selector[4] for the bootstrap test based on the minimum distance
 # Note that the power calculation needs a very long time (days) for the bootstrap tests.
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(TRUE,TRUE,FALSE,FALSE)
+selector=c(FALSE,TRUE,FALSE,FALSE)
 
 
 # The number of bootstrap simulations is set to 2000 instead of 10000 in order to
@@ -122,7 +122,7 @@ write.table(sensi_example4,"sensi_example4.txt")
 
 nSamples=1000
 nSimulation=2000
-selector=c(FALSE,TRUE,FALSE,FALSE)
+selector=c(TRUE,FALSE,FALSE,FALSE)
 
 powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation)
 write.table(powerExample1,"powerExample1.txt")
