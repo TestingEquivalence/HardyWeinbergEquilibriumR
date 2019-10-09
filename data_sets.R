@@ -47,3 +47,17 @@ example4 = matrix(data=c(178, 0, 0,
                          85, 60, 0,
                          141, 170, 334),
                   nrow=3, ncol=3, byrow = TRUE)
+
+# 5. example
+# Genotype frequency data at Rhesus locus. 
+# Less frequently observed alleles are deleted.
+# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
+# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
+
+example5= matrix(data=c(1236, 0, 0, 0, 0,
+                        120, 3, 0, 0,  0, 
+                        982, 55, 249, 0, 0, 
+                        2582, 132,  1162, 1312, 0, 
+                        115, 5, 53, 149, 4),
+                 nrow=5, ncol=5, byrow=TRUE)
+

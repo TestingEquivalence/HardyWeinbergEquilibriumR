@@ -24,7 +24,7 @@ nSamples=1000
 # selector[4] for the bootstrap test based on the minimum distance
 # Note that the power calculation needs a very long time (days) for the bootstrap tests.
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(FALSE,TRUE,FALSE,FALSE)
+selector=c(TRUE,TRUE,TRUE,TRUE)
 
 
 # The number of bootstrap simulations is set to 2000 instead of 10000 in order to
@@ -74,13 +74,25 @@ write.table(sizeSample3, "sizeSample3.txt")
 sizeSample4=matrix(data=NA, nrow=10, ncol=5)
 colnames(sizeSample4)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
 
-sizeSample4[1,]=powerAtPoint(example4,0.06,nSamples,selector)
-sizeSample4[2,]=powerAtPoint(example4,0.05,nSamples,selector)
-sizeSample4[3,]=powerAtPoint(example4,0.04,nSamples,selector)
-sizeSample4[4,]=powerAtPoint(example4,0.03,nSamples,selector)
+sizeSample4[1,]=powerAtPoint(example4,0.06,nSamples,selector,nSimulation)
+sizeSample4[2,]=powerAtPoint(example4,0.05,nSamples,selector,nSimulation)
+sizeSample4[3,]=powerAtPoint(example4,0.04,nSamples,selector,nSimulation)
+sizeSample4[4,]=powerAtPoint(example4,0.03,nSamples,selector,nSimulation)
 
 
 write.table(sizeSample4, "sizeSample4.txt")
+
+# power at sample5
+sizeSample5=matrix(data=NA, nrow=10, ncol=5)
+colnames(sizeSample5)=c("eps","asy_cond","bst_cnd","asy_min","bst_min")
+
+sizeSample5[1,]=powerAtPoint(example5,0.018,nSamples,selector,nSimulation)
+sizeSample5[2,]=powerAtPoint(example5,0.016,nSamples,selector,nSimulation)
+sizeSample5[3,]=powerAtPoint(example5,0.014,nSamples,selector,nSimulation)
+sizeSample5[4,]=powerAtPoint(example5,0.012,nSamples,selector,nSimulation)
+sizeSample5[5,]=powerAtPoint(example5,0.010,nSamples,selector,nSimulation)
+
+write.table(sizeSample5, "sizeSample5.txt")
 
 # Next we investigate if the type II error is sensitive to the allele distribution,
 # because the true allele distribution is unknown and the estimator is subject to
@@ -103,6 +115,10 @@ write.table(sensi_example3,"sensi_example3.txt")
 sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples,selector,nSimulation)
 write.table(sensi_example4,"sensi_example4.txt")
 
+sensi_example5=powerSensitivity(tab=example5,eps=0.016,nSamples,selector,nSimulation)
+write.table(sensi_example5,"sensi_example5.txt")
+
+
 # The I. type  error is an important measure of the test quality and in the best case it should 
 # not exceed the confidence level alpha.
 # The I. type eroor is the maximum of the test power over the boundary of H0.
@@ -122,7 +138,7 @@ write.table(sensi_example4,"sensi_example4.txt")
 
 nSamples=1000
 nSimulation=2000
-selector=c(TRUE,FALSE,FALSE,FALSE)
+selector=c(TRUE,TRUE,TRUE,TRUE)
 
 powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation)
 write.table(powerExample1,"powerExample1.txt")
@@ -135,4 +151,7 @@ write.table(powerExample3,"powerExample3.txt")
  
 powerExample4=boundaryPower(tab=example4,nSamples,selector,nSimulation)
 write.table(powerExample4,"powerExample4.txt")
+
+powerExample5=boundaryPower(tab=example5,nSamples,selector,nSimulation)
+write.table(powerExample5,"powerExample5.txt")
 
