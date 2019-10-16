@@ -138,7 +138,9 @@ write.table(sensi_example5,"sensi_example5.txt")
 
 nSamples=1000
 nSimulation=2000
-selector=c(TRUE,TRUE,TRUE,TRUE)
+#selector=c(TRUE,TRUE,TRUE,TRUE)
+selector=c(TRUE,FALSE,FALSE,FALSE)
+
 
 powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation)
 write.table(powerExample1,"powerExample1.txt")
