@@ -39,18 +39,18 @@ closeBoundaryPoint<-function(i,tab,eps,distance){
 
 
 
-powerAtBoundaryConditionalAsympt<-function(tab, nSamples, cl){
+powerAtBoundaryConditionalAsympt<-function(tab, nSamples, cl,alpha, scaleFactor){
   i=c(1:100)
   set.seed(01082019)
-  alpha=0.05
   n=sum(tab)
+  alpha=alpha*1
   
   #generate close boundary points
   eps=cond_l2(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,cond_l2)
-  boundaryPoints=c(tab/n, boundaryPoints)
   
   #power of the asymptotic test for conditional distance
+  eps=eps* scaleFactor
   test<-function(point){
     minEps=asymptotic_test_conditional(point,alpha)
     return(minEps<=eps)
@@ -68,18 +68,17 @@ powerAtBoundaryConditionalAsympt<-function(tab, nSamples, cl){
   return(res)
 }
 
-powerAtBoundaryMinAsympt<-function(tab, nSamples, cl){
+powerAtBoundaryMinAsympt<-function(tab, nSamples, cl,alpha, scaleFactor){
   i=c(1:100)
   set.seed(01082019)
-  alpha=0.05
   n=sum(tab)
   
   #generate close boundary points
   eps=min_l2(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,min_l2)
-  boundaryPoints=c(tab/n, boundaryPoints)
   
   #power of the asymptotic test for the minimum distance
+  eps=eps*scaleFactor
   test<-function(point){
     minEps=asymptotic_test_minimum(point,alpha)
     return(minEps<=eps)
@@ -98,22 +97,21 @@ powerAtBoundaryMinAsympt<-function(tab, nSamples, cl){
 }
  
 
-powerAtBoundaryConditionalBst<-function(tab, nSamples, nSim,cl){
+powerAtBoundaryConditionalBst<-function(tab, nSamples, nSim,cl,alpha, scaleFactor){
   i=c(1:100)
   set.seed(01082019)
-  alpha=0.05
   n=sum(tab)
   nSim=nSim/1
   
   #generate close boundary points
   eps=cond_l2(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,cond_l2)
-  boundaryPoints=c(tab/n, boundaryPoints)
   
   
   j=1
   res=rep(NA,100)
   
+  eps=eps* scaleFactor
   for (point in boundaryPoints){
     #power of the bootstrap test for conditional distance
     test<-function(point){
@@ -129,19 +127,18 @@ powerAtBoundaryConditionalBst<-function(tab, nSamples, nSim,cl){
   return(res)
 }
  
-powerAtBoundaryMinBst<-function(tab, nSamples, nSim,cl){
+powerAtBoundaryMinBst<-function(tab, nSamples, nSim,cl,alpha, scaleFactor){
   i=c(1:100)
   set.seed(01082019)
-  alpha=0.05
   n=sum(tab)
   nSim=nSim/1
   
   #generate close boundary points
   eps=min_l2(tab/n)
   boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,min_l2)
-  boundaryPoints=c(tab/n, boundaryPoints)
   
   #power of the bootstrap test for minimum distance
+  eps=eps* scaleFactor
   test<-function(point){
     res=bootstrap_test_minimum(tab = point,alpha=alpha,eps = eps,nSimulation =nSim)
     return(res$result)
@@ -161,7 +158,7 @@ powerAtBoundaryMinBst<-function(tab, nSamples, nSim,cl){
 
 
 
-boundaryPower<-function(tab, nSamples, selector,nSimulation){
+boundaryPower<-function(tab, nSamples, selector,nSimulation,alpha, scaleFactor){
   asy_cond=rep(NA,100)
   bst_cond=rep(NA,100)
   asy_min=rep(NA,100)
@@ -171,22 +168,22 @@ boundaryPower<-function(tab, nSamples, selector,nSimulation){
   
   
   if (selector[1]){
-    asy_cond=powerAtBoundaryConditionalAsympt(tab,nSamples,cl)
+    asy_cond=powerAtBoundaryConditionalAsympt(tab,nSamples,cl,alpha, scaleFactor)
     print("asympt. cond. done!")
   }
   
   if (selector[2]){
-    bst_cond=powerAtBoundaryConditionalBst(tab,nSamples,nSimulation,cl)
+    bst_cond=powerAtBoundaryConditionalBst(tab,nSamples,nSimulation,cl,alpha, scaleFactor)
     print("bst. cond. done!")
   }
   
   if (selector[3]){
-    asy_min=powerAtBoundaryMinAsympt(tab,nSamples,cl)
+    asy_min=powerAtBoundaryMinAsympt(tab,nSamples,cl,alpha, scaleFactor)
     print("asympt. min. done!")
   }
   
   if (selector[4]){
-    bst_min=powerAtBoundaryMinBst(tab,nSamples,nSimulation,cl)
+    bst_min=powerAtBoundaryMinBst(tab,nSamples,nSimulation,cl,alpha, scaleFactor)
     print("bst. min. done!")
   }
   

@@ -140,20 +140,21 @@ nSamples=1000
 nSimulation=2000
 #selector=c(TRUE,TRUE,TRUE,TRUE)
 selector=c(TRUE,FALSE,FALSE,FALSE)
+alpha=0.025
+scaleFactor=1
 
-
-powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation)
+powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation,alpha, scaleFactor)
 write.table(powerExample1,"powerExample1.txt")
  
-powerExample2=boundaryPower(tab=example2,nSamples,selector,nSimulation)
+powerExample2=boundaryPower(tab=example2,nSamples,selector,nSimulation,alpha, scaleFactor)
 write.table(powerExample2,"powerExample2.txt")
  
-powerExample3=boundaryPower(tab=example3,nSamples,selector,nSimulation)
+powerExample3=boundaryPower(tab=example3,nSamples,selector,nSimulation,alpha, scaleFactor)
 write.table(powerExample3,"powerExample3.txt")
  
-powerExample4=boundaryPower(tab=example4,nSamples,selector,nSimulation)
+powerExample4=boundaryPower(tab=example4,nSamples,selector,nSimulation,alpha, scaleFactor)
 write.table(powerExample4,"powerExample4.txt")
 
-powerExample5=boundaryPower(tab=example5,nSamples,selector,nSimulation)
+powerExample5=boundaryPower(tab=example5,nSamples,selector,nSimulation,alpha,  scaleFactor)
 write.table(powerExample5,"powerExample5.txt")
 
