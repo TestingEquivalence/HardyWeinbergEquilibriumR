@@ -156,13 +156,43 @@ powerAtBoundaryMinBst<-function(tab, nSamples, nSim,cl,alpha, scaleFactor){
   return(res)
 }
 
+powerAtBoundaryConditionalResampling<-function(tab, nSamples, cl,alpha, scaleFactor){
+  i=c(1:100)
+  set.seed(01082019)
+  n=sum(tab)
+  alpha=alpha*1
+  
+  #generate close boundary points
+  eps=cond_l2(tab/n)
+  boundaryPoints=lapply(i, closeBoundaryPoint,tab,eps,cond_l2)
+  
+  #power of the asymptotic test for conditional distance
+  eps=eps* scaleFactor
+  test<-function(point){
+    minEps=resampling_test_conditional(tab,alpha)
+    return(minEps<=eps)
+  }
+  
+  j=1
+  res=rep(NA,100)
+  
+  for (point in boundaryPoints){
+    res[j]=power(point,test,n,nSamples,cl)
+    print(paste(j, " point done"))
+    j=j+1
+  }
+  
+  return(res)
+}
 
 
 boundaryPower<-function(tab, nSamples, selector,nSimulation,alpha, scaleFactor){
   asy_cond=rep(NA,100)
   bst_cond=rep(NA,100)
+  res_cond=rep(NA,100)
   asy_min=rep(NA,100)
   bst_min=rep(NA,100)
+  
   
   cl=getCluster()
   
@@ -187,9 +217,14 @@ boundaryPower<-function(tab, nSamples, selector,nSimulation,alpha, scaleFactor){
     print("bst. min. done!")
   }
   
+  if (selector[5]){
+    res_cond=powerAtBoundaryConditionalResampling(tab,nSamples,cl,alpha, scaleFactor)
+    print("res. cond. done!")
+  }
+  
   stopCluster(cl)
   
-  df=data.frame(asy_cond, bst_cond, asy_min, bst_min)
+  df=data.frame(asy_cond, bst_cond, res_cond, asy_min, bst_min)
   return(df)
 }
 

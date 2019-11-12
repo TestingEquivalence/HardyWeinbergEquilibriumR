@@ -75,4 +75,27 @@ asymptotic_test_minimum<-function(tab, alpha){
   return(eps)
 }
 
+resampling_stdev<-function(p,T,n, nSimulation){
+  i=c(1:nSimulation)
+  f<-function(k){
+    vp=as.vector(p)
+    v=rmultinom(n=1,size=n,prob=vp)
+    v=v/sum(v)
+    m=matrix(dat=v,nrow=nrow(p), ncol=ncol(p))
+    return(T(m))
+  }
+  sample=sapply(i,f)
+  return(sqrt(var(sample)))
+}
 
+resampling_test_conditional<-function(tab, alpha, nSimulation=2000){
+  n=sum(tab)
+  tab=tab/n
+  set.seed(01012020)
+  
+  vol =resampling_stdev(p=tab,T=cond_l2,nSimulation = nSimulation,n=n)
+  qt=qnorm(1-alpha,0,1)
+  t= cond_l2(tab)
+  eps = t + qt*vol
+  return(eps)
+}

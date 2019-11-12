@@ -7,14 +7,14 @@ source("data_sets.R")
 alpha=0.05
 
 #table of tests results for the conditional distance
-results_conditional_distance=matrix(data=NA, nrow=5,ncol=3)
+results_conditional_distance=matrix(data=NA, nrow=5,ncol=4)
 rownames(results_conditional_distance)=c("example 1","example 2","example 3", "example 4","example 5")
-colnames(results_conditional_distance)=c("distance","asymptotic test","bootstrap test")
+colnames(results_conditional_distance)=c("distance","asymptotic test","bootstrap test","resampling test")
 
 #table of tests results for the minimum distance
-results_minimum_distance=matrix(data=NA, nrow=5,ncol=3)
+results_minimum_distance=matrix(data=NA, nrow=5,ncol=4)
 rownames(results_minimum_distance)=c("example 1","example 2","example 3", "example 4", "example 5")
-colnames(results_minimum_distance)=c("distance","asymptotic test","bootstrap test")
+colnames(results_minimum_distance)=c("distance","asymptotic test","bootstrap test","resampling test")
 
 
 
@@ -28,6 +28,7 @@ print(example1)
 results_conditional_distance[1,1]=cond_l2(example1)
 results_conditional_distance[1,2]=asymptotic_test_conditional(example1,alpha)
 results_conditional_distance[1,3]=bootstrap_test_conditional(example1,alpha)
+results_conditional_distance[1,4]=resampling_test_conditional(example1,alpha)
 
 results_minimum_distance[1,1]=min_l2(example1)
 results_minimum_distance[1,2]=asymptotic_test_minimum(example1,alpha)
@@ -43,6 +44,7 @@ print(example2)
 results_conditional_distance[2,1]=cond_l2(example2)
 results_conditional_distance[2,2]=asymptotic_test_conditional(example2,alpha)
 results_conditional_distance[2,3]=bootstrap_test_conditional(example2,alpha)
+results_conditional_distance[2,4]=resampling_test_conditional(example2,alpha)
 
 results_minimum_distance[2,1]=min_l2(example2)
 results_minimum_distance[2,2]=asymptotic_test_minimum(example2,alpha)
@@ -59,6 +61,7 @@ print(example3)
 results_conditional_distance[3,1]=cond_l2(example3)
 results_conditional_distance[3,2]=asymptotic_test_conditional(example3,alpha)
 results_conditional_distance[3,3]=bootstrap_test_conditional(example3,alpha)
+results_conditional_distance[3,4]=resampling_test_conditional(example3,alpha)
 
 results_minimum_distance[3,1]=min_l2(example3)
 results_minimum_distance[3,2]=asymptotic_test_minimum(example3,alpha)
@@ -78,6 +81,7 @@ print(example4)
 results_conditional_distance[4,1]=cond_l2(example4)
 results_conditional_distance[4,2]=asymptotic_test_conditional(example4,alpha)
 results_conditional_distance[4,3]=bootstrap_test_conditional(example4,alpha)
+results_conditional_distance[4,4]=resampling_test_conditional(example4,alpha)
 
 results_minimum_distance[4,1]=min_l2(example4)
 results_minimum_distance[4,2]=asymptotic_test_minimum(example4,alpha)
@@ -93,6 +97,7 @@ print(example5)
 results_conditional_distance[5,1]=cond_l2(example5)
 results_conditional_distance[5,2]=asymptotic_test_conditional(example5,alpha)
 results_conditional_distance[5,3]=bootstrap_test_conditional(example5,alpha)
+results_conditional_distance[5,4]=resampling_test_conditional(example5,alpha)
 
 results_minimum_distance[5,1]=min_l2(example5)
 results_minimum_distance[5,2]=asymptotic_test_minimum(example5,alpha)
