@@ -99,3 +99,15 @@ resampling_test_conditional<-function(tab, alpha, nSimulation=2000){
   eps = t + qt*vol
   return(eps)
 }
+
+resampling_test_minimum<-function(tab, alpha, nSimulation=2000){
+  n=sum(tab)
+  tab=tab/n
+  set.seed(01012020)
+  
+  vol =resampling_stdev(p=tab,T=min_l2,nSimulation = nSimulation,n=n)
+  qt=qnorm(1-alpha,0,1)
+  t= min_l2(tab)
+  eps = t + qt*vol
+  return(eps)
+}
