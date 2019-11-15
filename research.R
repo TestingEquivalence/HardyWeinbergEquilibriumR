@@ -24,7 +24,7 @@ nSamples=1000
 # selector[4] for the bootstrap test based on the minimum distance
 # Note that the power calculation needs a very long time (days) for the bootstrap tests.
 # Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(FALSE,FALSE,FALSE,FALSE,TRUE)
+selector=c(FALSE,FALSE,FALSE,FALSE,FALSE,TRUE)
 
 
 # The number of bootstrap simulations is set to 2000 instead of 10000 in order to
@@ -34,7 +34,7 @@ nSimulation=2000
 
 #power at sample1
 sizeSample1=matrix(data=NA, nrow=10, ncol=6)
-colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond")
+colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
 
 sizeSample1[1,]=powerAtPoint(example1,0.12,nSamples,selector,nSimulation)
 sizeSample1[2,]=powerAtPoint(example1,0.10,nSamples,selector,nSimulation)
@@ -139,7 +139,7 @@ write.table(sensi_example5,"sensi_example5.txt")
 nSamples=1000
 nSimulation=2000
 #selector=c(TRUE,TRUE,TRUE,TRUE)
-selector=c(FALSE,FALSE,FALSE,FALSE,TRUE)
+selector=c(FALSE,FALSE,FALSE,FALSE,TRUE,FALSE)
 alpha=0.05
 scaleFactor=1
 

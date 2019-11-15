@@ -73,8 +73,18 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
     p5=power(tab,test,n,nSamples,cl)
   }
   
+  if (selector[6]){
+    test<-function(tab){
+      minEps=resampling_test_minimum(tab,alpha)
+      return(minEps<=eps)
+    }
+    
+    set.seed(11072019)
+    p6=power(tab,test,n,nSamples,cl)
+  }
   
-  return(c(eps,p1,p2,p3,p4,p5))
+  
+  return(c(eps,p1,p2,p3,p4,p5,p6))
 }
 
 # power of sample
@@ -117,7 +127,7 @@ powerSensitivity<-function(tab, eps, nSamples,selector,nSimulation){
   }
 
   stopCluster(cl)
-  colnames(res)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","resample_cond")
+  colnames(res)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","resample_cond","resample_min")
   return(res)
 }
 
