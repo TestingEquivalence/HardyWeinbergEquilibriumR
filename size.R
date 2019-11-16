@@ -63,6 +63,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
     p4=power(tab,test,n,nSamples,cl)
   }
   
+  p5=0
   if (selector[5]){
     test<-function(tab){
       minEps=resampling_test_conditional(tab,alpha)
@@ -73,6 +74,7 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
     p5=power(tab,test,n,nSamples,cl)
   }
   
+  p6=0
   if (selector[6]){
     test<-function(tab){
       minEps=resampling_test_minimum(tab,alpha)

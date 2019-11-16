@@ -33,7 +33,7 @@ nSimulation=2000
 
 
 #power at sample1
-sizeSample1=matrix(data=NA, nrow=10, ncol=6)
+sizeSample1=matrix(data=NA, nrow=10, ncol=7)
 colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
 
 sizeSample1[1,]=powerAtPoint(example1,0.12,nSamples,selector,nSimulation)
