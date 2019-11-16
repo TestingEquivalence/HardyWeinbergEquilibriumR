@@ -260,7 +260,7 @@ boundaryPower<-function(tab, nSamples, selector,nSimulation,alpha, scaleFactor){
   
   stopCluster(cl)
   
-  df=data.frame(asy_cond, bst_cond, res_cond, asy_min, bst_min)
+  df=data.frame(asy_cond, bst_cond, res_cond, asy_min, bst_min,res_min)
   return(df)
 }
 
