@@ -45,8 +45,8 @@ sizeSample1[5,]=powerAtPoint(example1,0.07,nSamples,selector,nSimulation)
 write.table(sizeSample1, "sizeSample1.txt")
 
 # power at sample2
-sizeSample2=matrix(data=NA, nrow=10, ncol=6)
-colnames(sizeSample2)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond")
+sizeSample2=matrix(data=NA, nrow=10, ncol=7)
+colnames(sizeSample2)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
 
 sizeSample2[1,]=powerAtPoint(example2,0.12,nSamples,selector,nSimulation)
 sizeSample2[2,]=powerAtPoint(example2,0.10,nSamples,selector,nSimulation)
@@ -57,9 +57,9 @@ sizeSample2[5,]=powerAtPoint(example2,0.07,nSamples,selector,nSimulation)
 write.table(sizeSample2, "sizeSample2.txt")
 
 # power at sample3
-sizeSample3=matrix(data=NA, nrow=10, ncol=6)
-colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond")
- 
+sizeSample3=matrix(data=NA, nrow=10, ncol=7)
+colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
+
 sizeSample3[1,]=powerAtPoint(example3,0.018,nSamples,selector,nSimulation)
 sizeSample3[2,]=powerAtPoint(example3,0.016,nSamples,selector,nSimulation)
 sizeSample3[3,]=powerAtPoint(example3,0.014,nSamples,selector,nSimulation)
@@ -71,8 +71,8 @@ write.table(sizeSample3, "sizeSample3.txt")
 
 
 # power at sample4
-sizeSample4=matrix(data=NA, nrow=10, ncol=6)
-colnames(sizeSample4)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond")
+sizeSample4=matrix(data=NA, nrow=10, ncol=7)
+colnames(sizeSample4)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
 
 sizeSample4[1,]=powerAtPoint(example4,0.06,nSamples,selector,nSimulation)
 sizeSample4[2,]=powerAtPoint(example4,0.05,nSamples,selector,nSimulation)
@@ -83,8 +83,8 @@ sizeSample4[4,]=powerAtPoint(example4,0.03,nSamples,selector,nSimulation)
 write.table(sizeSample4, "sizeSample4.txt")
 
 # power at sample5
-sizeSample5=matrix(data=NA, nrow=10, ncol=6)
-colnames(sizeSample5)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond")
+sizeSample5=matrix(data=NA, nrow=10, ncol=7)
+colnames(sizeSample5)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
 
 sizeSample5[1,]=powerAtPoint(example5,0.018,nSamples,selector,nSimulation)
 sizeSample5[2,]=powerAtPoint(example5,0.016,nSamples,selector,nSimulation)
