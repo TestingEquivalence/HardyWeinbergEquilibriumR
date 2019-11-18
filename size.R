@@ -118,7 +118,7 @@ powerSensitivity<-function(tab, eps, nSamples,selector,nSimulation){
   points=lapply(i,rp,p,n)
   
   j=1
-  res=matrix(data = NA, nrow=100, ncol=5)
+  res=matrix(data = NA, nrow=100, ncol=7)
   
   cl=getCluster()
   
