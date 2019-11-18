@@ -1,5 +1,5 @@
 source("distance.R")
-source("asymptotic_test.R")
+source("tests.R")
 source("bootstrap_test.R")
 source("data_sets.R")
 

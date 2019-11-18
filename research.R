@@ -1,5 +1,5 @@
 source("distance.R")
-source("asymptotic_test.R")
+source("tests.R")
 source("bootstrap_test.R")
 source("data_sets.R")
 source("simulation.R")
@@ -139,7 +139,7 @@ write.table(sensi_example5,"sensi_example5.txt")
 nSamples=1000
 nSimulation=2000
 #selector=c(TRUE,TRUE,TRUE,TRUE)
-selector=c(FALSE,FALSE,FALSE,FALSE,TRUE,FALSE)
+selector=c(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
 alpha=0.05
 scaleFactor=1
 
