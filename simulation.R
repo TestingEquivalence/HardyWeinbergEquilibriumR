@@ -1,8 +1,4 @@
 library(parallel)
-source("distance.R")
-source("asymptotic_test.R")
-source("bootstrap_test.R")
-
 
 # Calculate the number of cores
 getCluster<-function(){

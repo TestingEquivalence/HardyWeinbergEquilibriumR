@@ -1,6 +1,4 @@
-source("distance.R")
-source("asymptotic_test.R")
-source("bootstrap_test.R")
+source("tests.R")
 source("data_sets.R")
 source("simulation.R")
 
@@ -96,7 +94,6 @@ powerAtBoundaryMinAsympt<-function(tab, nSamples, cl,alpha, scaleFactor){
   return(res)
 }
  
-
 powerAtBoundaryConditionalBst<-function(tab, nSamples, nSim,cl,alpha, scaleFactor){
   i=c(1:100)
   set.seed(01082019)
@@ -254,8 +251,8 @@ boundaryPower<-function(tab, nSamples, selector,nSimulation,alpha, scaleFactor){
   }
   
   if (selector[6]){
-    res_cond=powerAtBoundaryConditionalResampling(tab,nSamples,cl,alpha, scaleFactor)
-    print("res. cond. done!")
+    res_min=powerAtBoundaryMinResampling(tab,nSamples,cl,alpha,scaleFactor)
+    print("res. min. done!")
   }
   
   stopCluster(cl)

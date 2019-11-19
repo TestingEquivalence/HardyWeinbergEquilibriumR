@@ -1,8 +1,3 @@
-source("distance.R")
-source("asymptotic_test.R")
-source("bootstrap_test.R")
-source("data_sets.R")
-source("simulation.R")
 
 powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
   alpha=0.05

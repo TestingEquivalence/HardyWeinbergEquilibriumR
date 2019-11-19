@@ -1,6 +1,4 @@
-source("distance.R")
 source("tests.R")
-source("bootstrap_test.R")
 source("data_sets.R")
 source("simulation.R")
 source("size.R")

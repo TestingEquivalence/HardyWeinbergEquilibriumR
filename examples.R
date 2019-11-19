@@ -1,4 +1,3 @@
-source("distance.R")
 source("tests.R")
 source("data_sets.R")
 
@@ -48,7 +47,7 @@ results_minimum_distance[2,2]=asymptotic_test_minimum(example2,alpha)
 results_minimum_distance[2,3]=resampling_test_minimum(example2,alpha)
 
 
-# 3. example
+ # 3. example
 # Reduced genotype frequency data at Rhesus locus.
 # Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
 # The Genetics of Hutman Populations. San Francisco: W. H. Freeman
