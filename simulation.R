@@ -7,12 +7,11 @@ getCluster<-function(){
   # Initiate cluster
   cl <- makeCluster(no_cores,'SOCK')
   clusterExport(cl,c("asymptotic_test_conditional","cond_l22_da","asympt_stdev",
-                     "cond_l22", "l22","linComb","linearBoundaryPoint",
-                   "derivative_cond_l22", "bootstrap_test_conditional", 
-                   "startValue","triangle","product","cond_l22_db","protoBstTest",
+                     "cond_l22", "l22","startValue",
+                   "derivative_cond_l22","triangle","product","cond_l22_db",
                    "asymptotic_test_minimum","min_l22","fn","cond_l2","min_l2",
-                   "p2triangle","l22_first_derivative","bootstrap_test_minimum",
-                   "closeRandomPoint","randomExteriorPoint","randomPoint",
+                   "p2triangle","l22_first_derivative",
+                   "closeRandomPoint",
                    "resampling_test_conditional","resampling_stdev","resampling_test_minimum"))
                 
   return(cl)

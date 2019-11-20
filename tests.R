@@ -1,5 +1,11 @@
 source("distance.R")
 
+tests=c(1,2,3,4)
+names(c)=c("asymptotic_test_conditional",
+                 "resampling_test_conditional",
+                 "asymptotic_test_minimum",
+                 "resampling_test_minimum")
+
 asympt_stdev<-function(p,derivative){
   vec = derivative
   vnsq_1  = sum(p*vec*vec)

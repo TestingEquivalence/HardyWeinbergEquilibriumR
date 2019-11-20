@@ -13,28 +13,13 @@ source("power.R")
 
 # number of samples to estimate test power
 nSamples=1000
-
-# Selector contains logical values, which select the evaluation 
-# for the different tests as follows: 
-# selector[1] for the asymptotic test based on the conditional distance
-# selector[2] for the bootstrap test based on the conditional distance
-# selector[3] for the asymptotic test based on the minimum distance
-# selector[4] for the bootstrap test based on the minimum distance
-# Note that the power calculation needs a very long time (days) for the bootstrap tests.
-# Power calculation uses parallel processing. Thus a strong parallel hardware is advantageous.
-selector=c(FALSE,FALSE,FALSE,FALSE,FALSE,TRUE)
-
-
-# The number of bootstrap simulations is set to 2000 instead of 10000 in order to
-# make power calcualation numerically feasible.
-nSimulation=2000
-
+testsToDo=tests
 
 #power at sample1
-sizeSample1=matrix(data=NA, nrow=10, ncol=7)
-colnames(sizeSample1)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
+sizeSample1=matrix(data=NA, nrow=5, ncol=5)
+colnames(sizeSample1)=c("eps","asy_cond","res_cond","asy_min","res_min")
 
-sizeSample1[1,]=powerAtPoint(example1,0.12,nSamples,selector,nSimulation)
+sizeSample1[1,]=powerAtPoint(example1,0.12,nSamples,testsToDo)
 sizeSample1[2,]=powerAtPoint(example1,0.10,nSamples,selector,nSimulation)
 sizeSample1[3,]=powerAtPoint(example1,0.09,nSamples,selector,nSimulation)
 sizeSample1[4,]=powerAtPoint(example1,0.08,nSamples,selector,nSimulation)

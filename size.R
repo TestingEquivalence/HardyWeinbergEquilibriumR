@@ -1,13 +1,12 @@
 
-powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
+powerAtHWE<-function(p,n,eps,nSamples, testsToDo, cl){
   alpha=0.05
   tab=p2hwe(p)
-  nSimulation=1*nSimulation
   
   #power of asymptotic test, conditional distance
-  p1=0
+  p1=NA
   
-  if (selector[1]){
+  if (1 %in% testsToDo){
     
     test<-function(tab){
       minEps=asymptotic_test_conditional(tab,alpha)
@@ -18,24 +17,21 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
     p1=power(tab,test,n,nSamples,cl)
   }
   
-  #power of bootstrap test, conditional distance
-  p2=0
-  
-  if (selector[2]){
+  p2=NA
+  if (2 %in% testsToDo){
+    
     test<-function(tab){
-      res=bootstrap_test_conditional(tab,alpha,nSimulation,0,eps)
-      return(res$result)
+      minEps=resampling_test_conditional(tab,alpha)
+      return(minEps<=eps)
     }
-  
     
     set.seed(11072019)
     p2=power(tab,test,n,nSamples,cl)
   }
   
   #power of asymptotic test, minimum distance
-  p3=0
-  
-  if (selector[3]){
+  p3=NA
+  if (3 %in% testsToDo){
     test<-function(tab){
       minEps=asymptotic_test_minimum(tab,alpha)
       return(minEps<=eps)
@@ -45,51 +41,26 @@ powerAtHWE<-function(p,n,eps,nSamples,selector,nSimulation, cl){
     p3=power(tab,test,n,nSamples,cl)
   }
   
-  #power of bootstrap test, conditional distance
-  p4=0
-  
-  if (selector[4]){
-    test<-function(tab){
-      res=bootstrap_test_minimum(tab,alpha, eps=eps, nSimulation = nSimulation)
-      return(res$result)
-    }
-    
-    set.seed(11072019)
-    p4=power(tab,test,n,nSamples,cl)
-  }
-  
-  p5=0
-  if (selector[5]){
-    test<-function(tab){
-      minEps=resampling_test_conditional(tab,alpha)
-      return(minEps<=eps)
-    }
-    
-    set.seed(11072019)
-    p5=power(tab,test,n,nSamples,cl)
-  }
-  
-  p6=0
-  if (selector[6]){
+  p4=NA
+  if (4 %in% testsToDo){
     test<-function(tab){
       minEps=resampling_test_minimum(tab,alpha)
       return(minEps<=eps)
     }
     
     set.seed(11072019)
-    p6=power(tab,test,n,nSamples,cl)
+    p4=power(tab,test,n,nSamples,cl)
   }
   
-  
-  return(c(eps,p1,p2,p3,p4,p5,p6))
+  return(c(eps,p1,p2,p3,p4))
 }
 
 # power of sample
-powerAtPoint<-function(tab, eps, nSamples, selector,nSimulation){
+powerAtPoint<-function(tab, eps, nSamples, testNumber){
   n=sum(tab)
   p=startValue(tab/n)
   cl=getCluster()
-  res=powerAtHWE(p,n,eps,nSamples,selector,nSimulation,cl)
+  res=powerAtHWE(p,n,eps,nSamples,testNumber,cl)
   stopCluster(cl)
   return(res)
 }

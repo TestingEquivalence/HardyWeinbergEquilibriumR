@@ -1,6 +1,3 @@
-source("tests.R")
-source("data_sets.R")
-source("simulation.R")
 
 closeRandomPoint<-function(tab, eps, distance){
   n=sum(tab)
