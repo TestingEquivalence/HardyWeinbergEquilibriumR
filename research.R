@@ -28,8 +28,8 @@ sizeSample1[5,]=powerAtPoint(example1,0.07,nSamples,testsToDo)
 write.table(sizeSample1, "sizeSample1.txt")
 
 # power at sample2
-sizeSample2=matrix(data=NA, nrow=10, ncol=7)
-colnames(sizeSample2)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
+sizeSample2=matrix(data=NA, nrow=5, ncol=5)
+colnames(sizeSample2)=c("eps","asy_cond","res_cond","asy_min","res_min")
 
 sizeSample2[1,]=powerAtPoint(example2,0.12,nSamples,testsToDo)
 sizeSample2[2,]=powerAtPoint(example2,0.10,nSamples,testsToDo)
@@ -40,8 +40,8 @@ sizeSample2[5,]=powerAtPoint(example2,0.07,nSamples,testsToDo)
 write.table(sizeSample2, "sizeSample2.txt")
 
 # power at sample3
-sizeSample3=matrix(data=NA, nrow=10, ncol=7)
-colnames(sizeSample3)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
+sizeSample3=matrix(data=NA, nrow=5, ncol=5)
+colnames(sizeSample3)=c("eps","asy_cond","res_cond","asy_min","res_min")
 
 sizeSample3[1,]=powerAtPoint(example3,0.018,nSamples,testsToDo)
 sizeSample3[2,]=powerAtPoint(example3,0.016,nSamples,testsToDo)
@@ -54,13 +54,14 @@ write.table(sizeSample3, "sizeSample3.txt")
 
 
 # power at sample4
-sizeSample4=matrix(data=NA, nrow=10, ncol=7)
-colnames(sizeSample4)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","res_cond","res_min")
+sizeSample4=matrix(data=NA, nrow=5, ncol=5)
+colnames(sizeSample4)=c("eps","asy_cond","res_cond","asy_min","res_min")
 
-sizeSample4[1,]=powerAtPoint(example4,0.06,nSamples,testsToDo)
-sizeSample4[2,]=powerAtPoint(example4,0.05,nSamples,testsToDo)
-sizeSample4[3,]=powerAtPoint(example4,0.04,nSamples,testsToDo)
-sizeSample4[4,]=powerAtPoint(example4,0.03,nSamples,testsToDo)
+sizeSample4[1,]=powerAtPoint(example4,0.018,nSamples,testsToDo)
+sizeSample4[2,]=powerAtPoint(example4,0.016,nSamples,testsToDo)
+sizeSample4[3,]=powerAtPoint(example4,0.014,nSamples,testsToDo)
+sizeSample4[4,]=powerAtPoint(example4,0.012,nSamples,testsToDo)
+sizeSample4[5,]=powerAtPoint(example4,0.010,nSamples,testsToDo)
 
 
 write.table(sizeSample4, "sizeSample4.txt")
