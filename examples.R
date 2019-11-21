@@ -5,13 +5,13 @@ source("data_sets.R")
 alpha=0.05
 
 #table of tests results for the conditional distance
-results_conditional_distance=matrix(data=NA, nrow=5,ncol=3)
-rownames(results_conditional_distance)=c("example 1","example 2","example 3", "example 4","example 5")
+results_conditional_distance=matrix(data=NA, nrow=4,ncol=3)
+rownames(results_conditional_distance)=c("example 1","example 2","example 3", "example 4")
 colnames(results_conditional_distance)=c("distance","asymptotic test","resampling test")
 
 #table of tests results for the minimum distance
-results_minimum_distance=matrix(data=NA, nrow=5,ncol=3)
-rownames(results_minimum_distance)=c("example 1","example 2","example 3", "example 4", "example 5")
+results_minimum_distance=matrix(data=NA, nrow=4,ncol=3)
+rownames(results_minimum_distance)=c("example 1","example 2","example 3", "example 4")
 colnames(results_minimum_distance)=c("distance","asymptotic test","resampling test")
 
 
@@ -47,8 +47,8 @@ results_minimum_distance[2,2]=asymptotic_test_minimum(example2,alpha)
 results_minimum_distance[2,3]=resampling_test_minimum(example2,alpha)
 
 
- # 3. example
-# Reduced genotype frequency data at Rhesus locus.
+# 3. example
+# Genotype frequency data at Rhesus locus.
 # Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
 # The Genetics of Hutman Populations. San Francisco: W. H. Freeman
 
@@ -62,14 +62,10 @@ results_minimum_distance[3,1]=min_l2(example3)
 results_minimum_distance[3,2]=asymptotic_test_minimum(example3,alpha)
 results_minimum_distance[3,3]=resampling_test_minimum(example3,alpha)
 
-
 # 4. example
-# HFE genotype of the whole population referred for a personal or family
-# history of iron overload (patients) 
-# Györffy B., Kocsis I. and Vasarhely B.
-# Biallelic genotype distributions in papers published in Gut between 1998 and 2003: 
-# altered conclusions after recalculating the Hardy-Weinberg equilibrium
-# Gut 2004;53:614–616
+# Reduced genotype frequency data at Rhesus locus.
+# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
+# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
 
 print(example4)
 
@@ -80,22 +76,6 @@ results_conditional_distance[4,3]=resampling_test_conditional(example4,alpha)
 results_minimum_distance[4,1]=min_l2(example4)
 results_minimum_distance[4,2]=asymptotic_test_minimum(example4,alpha)
 results_minimum_distance[4,3]=resampling_test_minimum(example4,alpha)
-
-# 5. example
-# Reduced genotype frequency data at Rhesus locus.
-# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
-# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
-
-print(example5)
-
-results_conditional_distance[5,1]=cond_l2(example5)
-results_conditional_distance[5,2]=asymptotic_test_conditional(example5,alpha)
-results_conditional_distance[5,3]=resampling_test_conditional(example5,alpha)
-
-results_minimum_distance[5,1]=min_l2(example5)
-results_minimum_distance[5,2]=asymptotic_test_minimum(example5,alpha)
-results_minimum_distance[5,3]=resampling_test_minimum(example5,alpha)
-
 
 write.table(results_conditional_distance,"results_conditional_distance.txt")
 write.table(results_minimum_distance,"results_minimum_distance.txt")

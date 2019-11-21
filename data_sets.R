@@ -21,12 +21,28 @@ example2 = matrix(data=c(2, 0, 0, 0,
 
 # 3. example
 # Genotype frequency data at Rhesus locus. 
+# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
+# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
+
+example3= matrix(data=c(1236,   0,   0,   0,   0,   0,   0,  0,  0,
+                        120,    3,   0,   0,   0,   0,   0,  0,  0,
+                        18,     0,   0,   0,   0,   0,   0,  0,  0,
+                        982,   55,   7, 249,   0,   0,   0,  0,  0,
+                        32,     1,   0,  12,   0,   0,   0,  0,  0,
+                        2582, 132,  20,1162,  29,1312,   0,  0,  0,
+                        6,      0,   0,   4,   0,   4,   0,  0,  0, 
+                        2,      0,   0,   0,   0,   0,   0,  0,  0,
+                        115,    5,   2,   53,  1, 149,   0,  0,  4),
+                        nrow=9, ncol=9, byrow=TRUE)
+
+# 4. example
+# Genotype frequency data at Rhesus locus. 
 # Alle  7 and 8 are delited from the matrix because 
 # rarely observed (14 and 2 times)
 # Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
 # The Genetics of Hutman Populations. San Francisco: W. H. Freeman
 
-example3= matrix(data=c(1236, 0, 0, 0, 0, 0, 0,
+example4= matrix(data=c(1236, 0, 0, 0, 0, 0, 0,
                         120, 3, 0, 0, 0, 0, 0, 
                         18, 0, 0, 0, 0, 0, 0, 
                         982, 55, 7, 249, 0, 0, 0, 
@@ -34,30 +50,4 @@ example3= matrix(data=c(1236, 0, 0, 0, 0, 0, 0,
                         2582, 132, 20, 1162, 29, 1312, 0, 
                         115, 5, 2, 53, 1, 149, 4),
                  nrow=7, ncol=7, byrow=TRUE)
-
-# 4. example
-# HFE genotype of the whole population referred for a personal or family
-# history of iron overload (patients) 
-# Györffy B., Kocsis I. and Vasarhely B.
-# Biallelic genotype distributions in papers published in Gut between 1998 and 2003: 
-# altered conclusions after recalculating the Hardy-Weinberg equilibrium
-# Gut 2004;53:614–616
-
-example4 = matrix(data=c(178, 0, 0,
-                         85, 60, 0,
-                         141, 170, 334),
-                  nrow=3, ncol=3, byrow = TRUE)
-
-# 5. example
-# Genotype frequency data at Rhesus locus. 
-# Less frequently observed alleles are deleted.
-# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
-# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
-
-example5= matrix(data=c(1236, 0, 0, 0, 0,
-                        120, 3, 0, 0,  0, 
-                        982, 55, 249, 0, 0, 
-                        2582, 132,  1162, 1312, 0, 
-                        115, 5, 53, 149, 4),
-                 nrow=5, ncol=5, byrow=TRUE)
 
