@@ -1,7 +1,7 @@
 source("distance.R")
 
 tests=c(1,2,3,4)
-names(c)=c("asymptotic_test_conditional",
+names(tests)=c("asymptotic_test_conditional",
                  "resampling_test_conditional",
                  "asymptotic_test_minimum",
                  "resampling_test_minimum")
