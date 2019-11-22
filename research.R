@@ -75,21 +75,17 @@ write.table(sizeSample4, "sizeSample4.txt")
 # for the considered data sets, because the test power vary very little from point to point.
 # Then the test power is computed for each random sample under assumption of Hardy Weinberg equilibrium.
 
-sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples,selector,nSimulation)
+sensi_example1=powerSensitivity(tab=example1,eps=0.1,nSamples,testsToDo)
 write.table(sensi_example1,"sensi_example1.txt")
 
-sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples,selector,nSimulation)
+sensi_example2=powerSensitivity(tab=example2,eps=0.1,nSamples,testsToDo)
 write.table(sensi_example2,"sensi_example2.txt")
 
-sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples,selector,nSimulation)
+sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples,testsToDo)
 write.table(sensi_example3,"sensi_example3.txt")
 
-sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples,selector,nSimulation)
+sensi_example4=powerSensitivity(tab=example4,eps=0.05,nSamples,testsToDo)
 write.table(sensi_example4,"sensi_example4.txt")
-
-sensi_example5=powerSensitivity(tab=example5,eps=0.016,nSamples,selector,nSimulation)
-write.table(sensi_example5,"sensi_example5.txt")
-
 
 # The I. type  error is an important measure of the test quality and in the best case it should 
 # not exceed the confidence level alpha.

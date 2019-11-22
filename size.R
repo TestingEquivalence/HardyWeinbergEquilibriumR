@@ -73,7 +73,7 @@ rp<-function(i,p,n){
 
 
 # power sensitivity
-powerSensitivity<-function(tab, eps, nSamples,selector,nSimulation){
+powerSensitivity<-function(tab, eps, nSamples,testsToDo){
   n=sum(tab)
   p=startValue(tab/n)
   
@@ -84,18 +84,18 @@ powerSensitivity<-function(tab, eps, nSamples,selector,nSimulation){
   points=lapply(i,rp,p,n)
   
   j=1
-  res=matrix(data = NA, nrow=100, ncol=7)
+  res=matrix(data = NA, nrow=100, ncol=5)
   
   cl=getCluster()
   
   for (point in points){
-    res[j,]=powerAtHWE(p=point,n,eps,nSamples,selector,nSimulation,cl)
+    res[j,]=powerAtHWE(p=point,n,eps,nSamples,testsToDo,cl)
     print(paste(j, " point done"))
     j=j+1
   }
 
   stopCluster(cl)
-  colnames(res)=c("eps","asy_cond","bst_cnd","asy_min","bst_min","resample_cond","resample_min")
+  colnames(res)=c("eps","asy_cond","res_cond","asy_min","res_min")
   return(res)
 }
 
