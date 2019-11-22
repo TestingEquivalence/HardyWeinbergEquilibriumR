@@ -104,13 +104,6 @@ write.table(sensi_example4,"sensi_example4.txt")
 # - The weight of the linear combination is adjusted such that 
 #   the linear combination  is at the boundary of H0.
 
-nSamples=1000
-nSimulation=2000
-#selector=c(TRUE,TRUE,TRUE,TRUE)
-selector=c(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
-alpha=0.05
-scaleFactor=1
-
 powerExample1=boundaryPower(tab=example1,nSamples,selector,nSimulation,alpha, scaleFactor)
 write.table(powerExample1,"powerExample1.txt")
  
