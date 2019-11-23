@@ -1,3 +1,17 @@
+linComb<-function(x,y,a){
+  return((1-a)*x+a*y) 
+}
+
+linearBoundaryPoint<-function(p,q,eps,distance){
+  aim<-function(a){
+    lc=linComb(p,q,a)
+    dst=distance(lc)
+    return(dst-eps)
+  }
+  
+  aMin=uniroot(aim, c(0,1))
+  return(linComb(p,q,aMin$root))
+}
 
 closeRandomPoint<-function(tab, eps, distance){
   n=sum(tab)
@@ -32,15 +46,7 @@ closeBoundaryPoint<-function(i,tab,eps,distance){
   return(res)
 }
 
-
-simTestPowerAtPoints(test, points){
-  sapply(points, power, test,n,nSamples,cl)
-}
-
-
-
-
-boundaryPower<-function(tab, nSamples, nSamples, testsToDo, cl ){
+boundaryPower<-function(tab, nSamples, testsToDo){
   alpha=0.05
   asy_cond=rep(NA,100)
   res_cond=rep(NA,100)
@@ -72,7 +78,7 @@ boundaryPower<-function(tab, nSamples, nSamples, testsToDo, cl ){
     }
     
     set.seed(11072019)
-    p1=power(tab,test,n,nSamples,cl)
+    asy_cond= sapply(boundaryPointsCond, power, test,n,nSamples,cl)
   }
   
   p2=NA
@@ -84,7 +90,7 @@ boundaryPower<-function(tab, nSamples, nSamples, testsToDo, cl ){
     }
     
     set.seed(11072019)
-    p2=power(tab,test,n,nSamples,cl)
+    res_cond= sapply(boundaryPointsCond, power, test,n,nSamples,cl)
   }
   
   #power of asymptotic test, minimum distance
@@ -96,7 +102,7 @@ boundaryPower<-function(tab, nSamples, nSamples, testsToDo, cl ){
     }
     
     set.seed(11072019)
-    p3=power(tab,test,n,nSamples,cl)
+    asy_min= sapply(boundaryPointsMin, power, test,n,nSamples,cl)
   }
   
   p4=NA
@@ -107,7 +113,7 @@ boundaryPower<-function(tab, nSamples, nSamples, testsToDo, cl ){
     }
     
     set.seed(11072019)
-    p4=power(tab,test,n,nSamples,cl)
+    res_min= sapply(boundaryPointsMin, power, test,n,nSamples,cl)
   }
   
   stopCluster(cl)
