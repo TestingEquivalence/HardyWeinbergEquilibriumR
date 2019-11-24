@@ -1,5 +1,8 @@
 source("distance.R")
 
+#vector of test numbers and names
+#test numbers are used in research.R to choose,
+#which tests should be simulated
 tests=c(1,2,3,4)
 names(tests)=c("asymptotic_test_conditional",
                  "resampling_test_conditional",
@@ -33,7 +36,7 @@ asympt_stdev<-function(p,derivative){
 #' slight shrinkage of the tolerance parameter epsilon may be appropriate.
 #' We prefer the slight shrinkage of the tolerance parameter 
 #' because it is more effective and the significance level remains unchanged.
-#' \code{asymptotic_test_absolute} asymptotic test for approximate row column independence
+#' \code{asymptotic_test_conditional} asymptotic test for approximate row column independence
 #' in two way contingency tables. 
 #' The test statistic is scaled Euclidian distance between the contingency table
 #' and the product measure of the marginal distributions.
@@ -94,6 +97,26 @@ resampling_stdev<-function(p,T,n, nSimulation){
   return(sqrt(var(sample)))
 }
 
+#' The resampling test uses bootstrap to estimate the variance of the test statistics.
+#' The test statistic is scaled Euclidian distance between the contingency table
+#' and the product measure of the marginal distributions.
+#' The resampling test needs some sufficiently large number of the observations
+#' in any cell of the contingency table.
+#' It should be used carefully because the test is approximate 
+#' and may be anti-conservative at some points. 
+#' In order to obtain a conservative test reducing of alpha  (usually halving) or
+#' slight shrinkage of the tolerance parameter epsilon may be appropriate.
+#' We prefer the slight shrinkage of the tolerance parameter 
+#' because it is more effective and the significance level remains unchanged.
+#' \code{resampling_test_conditional} asymptotic test for approximate row column independence
+#' in two way contingency tables. 
+#' The test statistic is scaled Euclidian distance between the contingency table
+#' and the product measure of the marginal distributions.
+#' @param tab contingency table containing the counts of events
+#' @param alpha significance level
+#' @param nSimulation
+#' @return test returns the minimum tolerance parameter epsilon,
+#' for which the approximate independence can be shown
 resampling_test_conditional<-function(tab, alpha, nSimulation=2000){
   n=sum(tab)
   tab=tab/n
