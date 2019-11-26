@@ -105,21 +105,16 @@ resampling_stdev<-function(p,T,n, nSimulation){
 #' The resampling test uses bootstrap to estimate the variance of the test statistics.
 #' The test statistic is Euclidian distance between the genotype distribution
 #' and Hardy Weinberg Equilibrium, which is implied by allele distribution.
-#' It should be used carefully because the test is approximate 
+#' The test should be used carefully because it is approximate 
 #' and may be anti-conservative at some points. 
 #' In order to obtain a conservative test reducing of alpha  (usually halving) or
 #' slight shrinkage of the tolerance parameter epsilon may be appropriate.
-#' We prefer the slight shrinkage of the tolerance parameter 
-#' because it is more effective and the significance level remains unchanged.
-#' \code{resampling_test_conditional} asymptotic test for approximate row column independence
-#' in two way contingency tables. 
-#' The test statistic is scaled Euclidian distance between the contingency table
-#' and the product measure of the marginal distributions.
-#' @param tab contingency table containing the counts of events
+#' \code{resampling_test_conditional} equivalence test for Hardy Weinberg Equilibrium
+#' @param tab genotype distribution (lower triangle)
 #' @param alpha significance level
 #' @param nSimulation number of resampling simulationen
-#' @return test returns the minimum tolerance parameter epsilon,
-#' for which the approximate independence can be shown
+#' @return test returns the minimum tolerance parameter,
+#' for which equivalence could be shown
 resampling_test_conditional<-function(tab, alpha, nSimulation=2000){
   n=sum(tab)
   tab=tab/n
@@ -133,25 +128,19 @@ resampling_test_conditional<-function(tab, alpha, nSimulation=2000){
 }
 
 #' The resampling test uses bootstrap to estimate the variance of the test statistics.
-#' The test statistic is scaled Euclidian distance between the contingency table
-#' and the product measure of the marginal distributions.
-#' The resampling test needs some sufficiently large number of the observations
-#' in any cell of the contingency table.
-#' It should be used carefully because the test is approximate 
+#' The test statistic is the minimum Euclidean distance between the genotype distribution 
+#' and the family of Hardy Weinberg Equilibriums.
+#' The test should be used carefully because it is approximate 
 #' and may be anti-conservative at some points. 
 #' In order to obtain a conservative test reducing of alpha  (usually halving) or
-#' slight shrinkage of the tolerance parameter epsilon may be appropriate.
-#' We prefer the slight shrinkage of the tolerance parameter 
-#' because it is more effective and the significance level remains unchanged.
-#' \code{resampling_test_minimum}resampling test for approximate row column independence
-#' in two way contingency tables. 
-#' The test statistic is scaled Euclidian distance between the contingency table
-#' and the product measure of the marginal distributions.
-#' @param tab contingency table containing the counts of events
+#' slight shrinkage of the tolerance parameter may be appropriate.
+#' \code{resampling_test_minimum} equivalence test for Hardy Weinberg Equilibrium
+#' @param tab genotype distribution (lower triangle)
 #' @param alpha significance level
 #' @param nSimulation number of resampling simulationen
-#' @return test returns the minimum tolerance parameter epsilon,
-#' for which the approximate independence can be shown
+#' @return test returns the minimum tolerance parameter,
+#' for which equivalence could be shown
+
 resampling_test_minimum<-function(tab, alpha, nSimulation=2000){
   n=sum(tab)
   tab=tab/n
