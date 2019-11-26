@@ -17,7 +17,7 @@ colnames(results_minimum_distance)=c("distance","asymptotic test","resampling te
 
 
 # 1. example
-# rheumatoid arthritis (RA) study
+# rheumatoid arthritis study
 # Wordsworth P, Pile KD, Buckley JD, Lanchbury JSS, Ollier B, Lathrop M and Bell JI (1992)
 # HLA heterozygosity contributes to susceptibility to rheumatoid arthritis. 
 # Am J Hum Genet 51:585-591.
