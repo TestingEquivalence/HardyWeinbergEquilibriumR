@@ -61,21 +61,3 @@ results_conditional_distance[3,3]=resampling_test_conditional(example3,alpha)
 results_minimum_distance[3,1]=min_l2(example3)
 results_minimum_distance[3,2]=asymptotic_test_minimum(example3,alpha)
 results_minimum_distance[3,3]=resampling_test_minimum(example3,alpha)
-
-# 4. example
-# Reduced genotype frequency data at Rhesus locus.
-# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
-# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
-
-print(example4)
-
-results_conditional_distance[4,1]=cond_l2(example4)
-results_conditional_distance[4,2]=asymptotic_test_conditional(example4,alpha)
-results_conditional_distance[4,3]=resampling_test_conditional(example4,alpha)
-
-results_minimum_distance[4,1]=min_l2(example4)
-results_minimum_distance[4,2]=asymptotic_test_minimum(example4,alpha)
-results_minimum_distance[4,3]=resampling_test_minimum(example4,alpha)
-
-write.table(results_conditional_distance,"results_conditional_distance.txt")
-write.table(results_minimum_distance,"results_minimum_distance.txt")
