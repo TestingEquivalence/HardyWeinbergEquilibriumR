@@ -22,7 +22,7 @@ example2 = matrix(data=c(2, 0, 0, 0,
 # 3. example
 # Genotype frequency data at Rhesus locus. 
 # Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
-# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
+# The Genetics of Human Populations. San Francisco: W. H. Freeman
 
 example3= matrix(data=c(1236,   0,   0,   0,   0,   0,   0,  0,  0,
                         120,    3,   0,   0,   0,   0,   0,  0,  0,

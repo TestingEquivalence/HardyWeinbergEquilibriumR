@@ -5,12 +5,12 @@ source("data_sets.R")
 alpha=0.05
 
 #table of tests results for the conditional distance
-results_conditional_distance=matrix(data=NA, nrow=4,ncol=3)
+results_conditional_distance=matrix(data=NA, nrow=3,ncol=3)
 rownames(results_conditional_distance)=c("example 1","example 2","example 3", "example 4")
 colnames(results_conditional_distance)=c("distance","asymptotic test","resampling test")
 
 #table of tests results for the minimum distance
-results_minimum_distance=matrix(data=NA, nrow=4,ncol=3)
+results_minimum_distance=matrix(data=NA, nrow=3,ncol=3)
 rownames(results_minimum_distance)=c("example 1","example 2","example 3", "example 4")
 colnames(results_minimum_distance)=c("distance","asymptotic test","resampling test")
 
