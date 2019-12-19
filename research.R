@@ -58,11 +58,11 @@ write.table(sizeSample3, "sizeSample3.txt")
 sizeSample4=matrix(data=NA, nrow=5, ncol=5)
 colnames(sizeSample4)=c("eps","asy_cond","res_cond","asy_min","res_min")
 
-sizeSample4[1,]=powerAtPoint(example4,0.018,nSamples,testsToDo)
-sizeSample4[2,]=powerAtPoint(example4,0.016,nSamples,testsToDo)
-sizeSample4[3,]=powerAtPoint(example4,0.014,nSamples,testsToDo)
-sizeSample4[4,]=powerAtPoint(example4,0.012,nSamples,testsToDo)
-sizeSample4[5,]=powerAtPoint(example4,0.010,nSamples,testsToDo)
+sizeSample4[1,]=powerAtPoint(example4,0.14,nSamples,testsToDo)
+sizeSample4[2,]=powerAtPoint(example4,0.16,nSamples,testsToDo)
+sizeSample4[3,]=powerAtPoint(example4,0.18,nSamples,testsToDo)
+sizeSample4[4,]=powerAtPoint(example4,0.20,nSamples,testsToDo)
+sizeSample4[5,]=powerAtPoint(example4,0.22,nSamples,testsToDo)
 
 
 write.table(sizeSample4, "sizeSample4.txt")
@@ -85,6 +85,9 @@ write.table(sensi_example2,"sensi_example2.txt")
 
 sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples,testsToDo)
 write.table(sensi_example3,"sensi_example3.txt")
+
+sensi_example4=powerSensitivity(tab=example4,eps=0.016,nSamples,testsToDo)
+write.table(sensi_example4,"sensi_example4.txt")
 
 # The I. type  error is an important measure of the test quality and 
 # it should not exceed the confidence level alpha in the best case.
@@ -115,4 +118,6 @@ write.table(powerExample2,"powerExample2.txt")
 powerExample3=boundaryPower(tab=example3,nSamples,testsToDo)
 write.table(powerExample3,"powerExample3.txt")
  
+powerExample4=boundaryPower(tab=example4,nSamples,testsToDo)
+write.table(powerExample4,"powerExample4.txt")
 

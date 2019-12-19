@@ -5,12 +5,12 @@ source("data_sets.R")
 alpha=0.05
 
 #table of tests results for the conditional distance
-results_conditional_distance=matrix(data=NA, nrow=3,ncol=3)
+results_conditional_distance=matrix(data=NA, nrow=4,ncol=3)
 rownames(results_conditional_distance)=c("example 1","example 2","example 3", "example 4")
 colnames(results_conditional_distance)=c("distance","asymptotic test","resampling test")
 
 #table of tests results for the minimum distance
-results_minimum_distance=matrix(data=NA, nrow=3,ncol=3)
+results_minimum_distance=matrix(data=NA, nrow=4,ncol=3)
 rownames(results_minimum_distance)=c("example 1","example 2","example 3", "example 4")
 colnames(results_minimum_distance)=c("distance","asymptotic test","resampling test")
 
@@ -61,3 +61,19 @@ results_conditional_distance[3,3]=resampling_test_conditional(example3,alpha)
 results_minimum_distance[3,1]=min_l2(example3)
 results_minimum_distance[3,2]=asymptotic_test_minimum(example3,alpha)
 results_minimum_distance[3,3]=resampling_test_minimum(example3,alpha)
+
+# 4. example
+# Genotype frequency data from Louis and Dempster (1987)
+# Louis, E. J. and Dempster, E. R. (1987). 
+# An exact test for Hardy-Weinberg and multiple alleles.
+# Biometrics 43, 805-811.
+
+print(example4)
+
+results_conditional_distance[4,1]=cond_l2(example4)
+results_conditional_distance[4,2]=asymptotic_test_conditional(example4,alpha)
+results_conditional_distance[4,3]=resampling_test_conditional(example4,alpha)
+
+results_minimum_distance[4,1]=min_l2(example4)
+results_minimum_distance[4,2]=asymptotic_test_minimum(example4,alpha)
+results_minimum_distance[4,3]=resampling_test_minimum(example4,alpha)

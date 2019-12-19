@@ -36,18 +36,12 @@ example3= matrix(data=c(1236,   0,   0,   0,   0,   0,   0,  0,  0,
                         nrow=9, ncol=9, byrow=TRUE)
 
 # 4. example
-# Genotype frequency data at Rhesus locus. 
-# Alle  7 and 8 are delited from the matrix because 
-# rarely observed (14 and 2 times)
-# Cavalli-Sforza, L. L. and Bodmer, W. F. (1971). 
-# The Genetics of Hutman Populations. San Francisco: W. H. Freeman
-
-example4= matrix(data=c(1236, 0, 0, 0, 0, 0, 0,
-                        120, 3, 0, 0, 0, 0, 0, 
-                        18, 0, 0, 0, 0, 0, 0, 
-                        982, 55, 7, 249, 0, 0, 0, 
-                        32, 1, 0, 12, 0, 0, 0, 
-                        2582, 132, 20, 1162, 29, 1312, 0, 
-                        115, 5, 2, 53, 1, 149, 4),
-                 nrow=7, ncol=7, byrow=TRUE)
-
+# Genotype frequency data from Louis and Dempster (1987)
+# Louis, E. J. and Dempster, E. R. (1987). 
+# An exact test for Hardy-Weinberg and multiple alleles.
+# Biometrics 43, 805-811. 
+example4 = matrix(data=c( 0,  0,  0,  0,
+                          3,  1,  0,  0,
+                          5, 18,  1,  0,
+                          3,  7,  5,  2),
+                  nrow=4, ncol=4, byrow=TRUE)
