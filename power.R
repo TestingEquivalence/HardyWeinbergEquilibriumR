@@ -46,7 +46,7 @@ closeBoundaryPoint<-function(i,tab,eps,distance){
   return(res)
 }
 
-boundaryPower<-function(tab, nSamples, testsToDo){
+boundaryPower<-function(tab, nSamples, testsToDo, eps){
   alpha=0.05
   asy_cond=rep(NA,100)
   res_cond=rep(NA,100)
@@ -58,12 +58,10 @@ boundaryPower<-function(tab, nSamples, testsToDo){
   
   #generate close boundary points for min. distance
   set.seed(01082019)
-  eps=min_l2(tab/n)
   boundaryPointsMin=lapply(i, closeBoundaryPoint,tab,eps,min_l2)
   
   #generate close boundary points for conditional distance
   set.seed(01082019)
-  eps=cond_l2(tab/n)
   boundaryPointsCond=lapply(i, closeBoundaryPoint,tab,eps,cond_l2)
   
   

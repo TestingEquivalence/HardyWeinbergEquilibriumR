@@ -86,7 +86,7 @@ write.table(sensi_example2,"sensi_example2.txt")
 sensi_example3=powerSensitivity(tab=example3,eps=0.016,nSamples,testsToDo)
 write.table(sensi_example3,"sensi_example3.txt")
 
-sensi_example4=powerSensitivity(tab=example4,eps=0.016,nSamples,testsToDo)
+sensi_example4=powerSensitivity(tab=example4,eps=0.2,nSamples,testsToDo)
 write.table(sensi_example4,"sensi_example4.txt")
 
 # The I. type  error is an important measure of the test quality and 
@@ -109,13 +109,13 @@ write.table(sensi_example4,"sensi_example4.txt")
 # - The weight of the linear combination is adjusted such that 
 #   the linear combination  is at the boundary of H0.
 
-powerExample1=boundaryPower(tab=example1,nSamples,testsToDo)
+powerExample1=boundaryPower(tab=example1,nSamples,testsToDo, eps=0.1)
 write.table(powerExample1,"powerExample1.txt")
  
-powerExample2=boundaryPower(tab=example2,nSamples,testsToDo)
+powerExample2=boundaryPower(tab=example2,nSamples,testsToDo, eps=0.1)
 write.table(powerExample2,"powerExample2.txt")
  
-powerExample3=boundaryPower(tab=example3,nSamples,testsToDo)
+powerExample3=boundaryPower(tab=example3,nSamples,testsToDo, eps=0.016)
 write.table(powerExample3,"powerExample3.txt")
  
 powerExample4=boundaryPower(tab=example4,nSamples,testsToDo)
